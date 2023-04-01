@@ -1,0 +1,79 @@
+
+.root{
+	-fx-background-color: #F0F4F8;
+	-fx-alignment: center;
+}
+
+.label {
+	-fx-text-fill: #044E54;
+	-fx-font-size: 16px;
+}
+.button {
+	-fx-font-size: 18px;
+	-fx-background-color : #66CDAA;
+	-fx-text-fill: white;
+	-fx-font-size: 22px;
+	-fx-font-weight: bold;
+}
+#tictactoe{
+	-fx-font-size: 60px;
+	-fx-text-fill: #ff0000;
+	-fx-font-weight: bold;
+}
+#btnQuitter,#btnQuitter2{
+	-fx-background-image: url("button_cancel.png");
+    -fx-background-size: 25 25;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:bottom 10px right 210px; 
+}
+#btnCommencer{
+	-fx-background-image: url("apply.png");
+    -fx-background-size: 25 25;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left; 
+}
+#btnJouerSeul{
+	-fx-background-image: url("userseul.png");
+    -fx-background-size: 45 60;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left; 
+}
+#btnJouerAmi{
+	-fx-background-image: url("user.png");
+    -fx-background-size: 35 40;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:bottom 2px right 210px;
+}
+#symbole1,#symbole2,#score1,#score2{
+	-fx-background-color :  #FF69B4;
+	-fx-text-fill: white;
+	-fx-font-size: 17px;
+	-fx-font-weight: bold;
+}
+#signe2{
+	-fx-text-fill: red;
+	-fx-font-size: 17px;
+	-fx-font-weight: bold;
+}
+#signe1{
+	-fx-text-fill: green;
+	-fx-font-size: 17px;
+	-fx-font-weight: bold;
+}
+#bouton1,#bouton2,#bouton3,#bouton4,#bouton5,#bouton6,#bouton7,#bouton8,#bouton9{
+	-fx-background-color : white;
+	-fx-pref-height: 00px;
+    -fx-pref-width: 100px;
+    -fx-text-fill: red;
+}
+#btnReprendre{
+	-fx-font-size: 12px;
+	-fx-font-size: 15px;
+	-fx-font-weight: none;
+}
+#suppModele{
+	-fx-font-size: 16px;
+}
+#listModels{
+	-fx-font-size: 17px;
+}
