@@ -26,6 +26,7 @@ public class humanVsIaController {
     static Player human = new Player();
     static Player computer = new Player();
     public static String level;
+    public static  String  path;
     public static int h, lh;
     public static double lr;
     public  static MultiLayerPerceptron mlp;
@@ -83,7 +84,7 @@ public class humanVsIaController {
 
 
         if (difficile.isSelected()) {
-
+            facile.setSelected(false);
             level = "D";
             ConfigFileLoader configFileLoader = new ConfigFileLoader();
             configFileLoader.loadConfigFile("resources/config.txt");
@@ -97,6 +98,7 @@ public class humanVsIaController {
 
         } else if (facile.isSelected()) {
             level = "F";
+            difficile.setSelected(false);
             ConfigFileLoader configFileLoader = new ConfigFileLoader();
             configFileLoader.loadConfigFile("resources/config.txt");
             Config config;
@@ -120,10 +122,12 @@ public class humanVsIaController {
             if(r) {	//le fichier existe il nous load le chemin du fichier et ouvre la fenetre Joueur vs IA
                 Parent nouveauJeux;
                 try {
-                    String path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
+                    System.out.println("jai un problemme ");
+                   // C:\Users\etudiant\Desktop\Morpion\resources\models
+                     path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
                     mlp = MultiLayerPerceptron.load(path);
 
-                    nouveauJeux = FXMLLoader.load(getClass().getResource("humanvshumangameBord.fxml"));
+                    nouveauJeux = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
                     Scene configurationScene = new Scene(nouveauJeux);
                     //cette ligne permet de recuperer les infos
                     Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -135,7 +139,7 @@ public class humanVsIaController {
                 }
 
             }else if(!r ) {	//le fichier n'existe pas il recupere le chemin et lance la fenetre d'apprentissage
-               String path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
+                path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
                 Parent apprentissage;
                 try {
                     apprentissage = FXMLLoader.load(getClass().getResource("Progessbar.fxml"));
@@ -163,7 +167,7 @@ public class humanVsIaController {
     public void createFile(int h, double lr, int lh) throws IOException {
 
         try {
-            String path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
+            path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
            // String path = "C:\Users\etudiant\Desktop\Morpion\resources\models\mlp_" + h + "_" + lr + "_" + lh + ".srl";
             File file = new File(path);
 
