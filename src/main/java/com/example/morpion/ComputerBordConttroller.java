@@ -110,7 +110,7 @@ public class ComputerBordConttroller implements Initializable {
                         find = true;
                     }
                     i++;
-                    System.out.println("cest fait");
+                    System.out.println("cest  a été fait");
 
 
 
