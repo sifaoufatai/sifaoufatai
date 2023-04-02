@@ -67,6 +67,7 @@ public class ProgessBarContoller implements Initializable {
             // String s="";
             task = getTask(mapTrain, path);
             pb.progressProperty().bind(task.progressProperty());
+           humanVsIaController.mlp = MultiLayerPerceptron.load(path);
 
             task.messageProperty().addListener(new ChangeListener<String>() {
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -92,7 +93,7 @@ public class ProgessBarContoller implements Initializable {
                     // Load the new scene
                     Parent fenetre1;
                     try {
-                        fenetre1 = FXMLLoader.load(getClass().getResource("humanvshumangameBord.fxml"));
+                        fenetre1 = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                         return;
