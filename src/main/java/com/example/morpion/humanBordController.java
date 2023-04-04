@@ -1,5 +1,7 @@
 package com.example.morpion;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +26,9 @@ public class humanBordController   implements Initializable {
     @FXML
     private Button bouton1, bouton2, bouton3, bouton4, bouton5, bouton6, bouton7, bouton8, bouton9;
     @FXML
-    private Label nom1, nom2, score1, score2, tourJoueur, pion1, pion2;
+    private Label nom1, nom2, score1, score2, tourJoueur, pion1, pion2, labelWiner;
     @FXML
-    private Button btnQuitter;
+    private Button btnQuit;
 
     private List<Label> infosJoueur1 = new ArrayList<>();
     private List<Label> infosJoueur2 = new ArrayList<>();
@@ -70,9 +73,9 @@ public class humanBordController   implements Initializable {
         infosJoueur2.add(pion2);
 
         if (j1.isStart() == true) {
-            tourJoueur.setText(j1.getName().concat(" c'est � vous de jouer !"));
+            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer !"));
         } else if (j2.isStart() == true) {
-            tourJoueur.setText(j2.getName().concat(" c'est � vous de jouer !"));
+            tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer !"));
         }
 
 
@@ -96,12 +99,12 @@ public class humanBordController   implements Initializable {
     //cette fonction permet de choisir le tour du joueur qui doit jouer
     public void choisirJoueur() {
         if (j1.isStart()) {
-            tourJoueur.setText(j2.getName().concat(" c'est � vous de jouer !"));
+            tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer !"));
             commencer = j1.getPawn();
         }
 
         if (j2.isStart()) {
-            tourJoueur.setText(j1.getName().concat(" c'est � vous de jouer !"));
+            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer !"));
             commencer = j2.getPawn();
         }
     }
@@ -112,6 +115,7 @@ public class humanBordController   implements Initializable {
 
             fin = true;
             tourJoueur.setText("Fin de Partie !!!");
+
             String val = b1.getText();
             int score = 0;
             List<Label> p = new ArrayList<>();
@@ -131,14 +135,28 @@ public class humanBordController   implements Initializable {
                 p.get(0).setText(j1.getName());
                 p.get(1).setText(j1.getScore() + "");
 
-                tourJoueur.setText("Le gagnant est " + j1.getName());
+                labelWiner.setText("Le gagnant est " + j1.getName());
+
             } else if (j2.getPawn() == val) {
                 j2.setScore(score);
                 p.get(0).setText(j2.getName());
                 p.get(1).setText(j2.getScore() + "");
 
-                tourJoueur.setText("Le gagnant est " + j2.getName());
+                labelWiner.setText("Le gagnant est " + j2.getName());
             }
+
+            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 34px;");
+
+            RotateTransition rt = new RotateTransition(Duration.seconds(1), labelWiner);
+            rt.setByAngle(360);
+            rt.setAutoReverse(true);
+
+            ScaleTransition st = new ScaleTransition(Duration.seconds(1), labelWiner);
+            st.setToX(2);
+            st.setToY(2);
+
+            rt.play();
+            st.play();
 
          /*   //application des transitions
             rotationTransition(b1);
@@ -193,14 +211,15 @@ public class humanBordController   implements Initializable {
     @FXML
 
     public void reprendre(ActionEvent event) {
+        labelWiner.setText("");
         fin= false ;
         for(Button b :listButtons) {b.setText("");b.setStyle("");}
         if(j1.start){
 
-            tourJoueur.setText(j1.getName().concat("cest à vous de jouer "));
+            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer "));
         }
         else {
-        tourJoueur.setText(j2.getName().concat("cest à vous de jouer "));}
+        tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer "));}
 
 
     }

@@ -13,9 +13,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Acueil.fxml"));
         Parent root = fxmlLoader.load();
-        fxmlLoader.setRoot(root); // Définit la racine de votre fichi
+        fxmlLoader.setRoot(root); // Définit la racine de votre fichie
 
-        Scene scene = new Scene(root, 320, 240);
+        Scene scene = new Scene(root, 930, 690);
         stage.setTitle("Hello welecom to tictac to application !");
         stage.setScene(scene);
         stage.show();

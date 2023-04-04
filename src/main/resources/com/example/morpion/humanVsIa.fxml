@@ -17,7 +17,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morpion.humanVsIaController">
    <center>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@../ressources.css/Main.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
           <children>
               <HBox alignment="CENTER" prefHeight="48.0" prefWidth="482.0" spacing="20.0">
                   <children>
