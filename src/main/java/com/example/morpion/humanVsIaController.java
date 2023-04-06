@@ -80,6 +80,7 @@ public class humanVsIaController {
         computer.setPawn("O");
         human.setPawn("x");
         human.setStart(true);
+        human.setName(nom.getText());
         computer.setStart(false);
 
 

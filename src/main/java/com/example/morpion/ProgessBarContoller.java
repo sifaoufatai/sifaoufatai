@@ -72,7 +72,7 @@ public class ProgessBarContoller implements Initializable {
             task.messageProperty().addListener(new ChangeListener<String>() {
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     System.out.println(newValue);
-                    // tf.setText("bonjour");
+
                     labelTest.setText(newValue);
                 }
             });
@@ -122,7 +122,8 @@ public class ProgessBarContoller implements Initializable {
 
             @Override
             protected MultiLayerPerceptron call() throws Exception {
-                double epochs =1000; //1000000000 ;
+               double epochs =1000; //1000000000 ;
+               // double epochs =1000000000;
                 double error = 0.0 ;
                 int onePercent = (int)(epochs/100);
 
@@ -153,7 +154,7 @@ public class ProgessBarContoller implements Initializable {
                 }
                 error /= epochs ;
                 if ( epochs > 0 ) {
-                    //updateMessage("final error is " + df_error.format(error));
+
                     updateMessage("final error is " + error);
                 }
                 net.save(chemin);

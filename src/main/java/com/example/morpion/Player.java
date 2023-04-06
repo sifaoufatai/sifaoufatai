@@ -23,8 +23,8 @@ public class Player {
         return name;
     }
 
-    public int getScore() {
-        return score;
+    public String getScore() {
+        return String.valueOf(score);
     }
 
     public void setScore(int score) {

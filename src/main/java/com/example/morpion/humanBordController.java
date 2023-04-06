@@ -1,5 +1,8 @@
 package com.example.morpion;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.desktop.ScreenSleepEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,6 +31,7 @@ public class humanBordController   implements Initializable {
     private Label nom1, nom2, score1, score2, tourJoueur, pion1, pion2;
     @FXML
     private Button btnQuitter;
+
 
     private List<Label> infosJoueur1 = new ArrayList<>();
     private List<Label> infosJoueur2 = new ArrayList<>();
@@ -62,6 +68,8 @@ public class humanBordController   implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+
+
         infosJoueur1.add(nom1);
         infosJoueur1.add(score1);
         infosJoueur1.add(pion1);
@@ -140,12 +148,13 @@ public class humanBordController   implements Initializable {
                 tourJoueur.setText("Le gagnant est " + j2.getName());
             }
 
-         /*   //application des transitions
+         //application des transitions
             rotationTransition(b1);
             rotationTransition(b2);
             rotationTransition(b3);
-            deplacementTransition(tourJoueur);
-            zoomTransition(tourJoueur);*/
+
+            zoomTransition(tourJoueur);
+            fendu(b1); fendu(b3); fendu(b3);
 
         }
 
@@ -193,7 +202,13 @@ public class humanBordController   implements Initializable {
     @FXML
 
     public void reprendre(ActionEvent event) {
+
+        for(Button b : listButtons) fendu(b);
+       ;
+       ;
+
         fin= false ;
+        for(Button b : listButtons) fendu(b);
         for(Button b :listButtons) {b.setText("");b.setStyle("");}
         if(j1.start){
 
@@ -204,6 +219,37 @@ public class humanBordController   implements Initializable {
 
 
     }
+
+    //transition des rotations
+    public void rotationTransition(Button btn) {
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(1000),btn);
+        rotateTransition.setByAngle(180f);
+        rotateTransition.setCycleCount(4);
+        rotateTransition.setAutoReverse(true);
+        rotateTransition.play();
+        btn.setStyle("-fx-background-color:mediumturquoise; -fx-text-fill: black;-fx-font-size: 34px;");
+    }
+    public void fendu(Button btn){
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), btn);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(2);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
+        btn.setStyle("-fx-background-color: coral; -fx-text-fill: white; -fx-font-size: 24px;");}
+    //Transisition de zoom
+    public void zoomTransition(Label label) {
+
+        ScaleTransition scaleTransition =  new ScaleTransition(Duration.millis(2000), label);
+        scaleTransition.setFromX(1);
+        scaleTransition.setFromY(1);
+        scaleTransition.setToX(2.5);
+        scaleTransition.setToY(2.5);
+        scaleTransition.setCycleCount(4);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+    }
+
 
 
 }
