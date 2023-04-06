@@ -20,7 +20,7 @@ public class humanvshumanControler {
     public RadioButton radioJoueur2;
     public static Player player1 = new Player();
     public static Player  player2 = new Player();
-    //quand on clique sur le boutton aide il nous affiche le bo�te du message d'information
+    //quand on clique sur le boutton aide il nous affiche le boite du message d'information
     @FXML
     public void help(ActionEvent event) {
         JOptionPane jOption;
@@ -29,12 +29,15 @@ public class humanvshumanControler {
     }
 
 
-
+    @FXML
     public void commencerJeux(ActionEvent actionEvent) {
         System.out.println(player1.getName());
         Parent newgame;
         try {
+            if(!radioJoueur1.isSelected() && !radioJoueur2.isSelected()) radioJoueur1.setSelected(true);
+
             selectJoueur();
+
             newgame = FXMLLoader.load(getClass().getResource("humanvshumangameBord.fxml"));
             Scene configurationScene = new Scene(newgame);
             Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -46,9 +49,7 @@ public class humanvshumanControler {
     }
 
 
-
-
-    public void selectJoueur(ActionEvent actionEvent) {
+    public void selectJoueur() {
         player1.setName(pseudo1.getText());
         player2.setName(pseudo2.getText());
 
@@ -65,7 +66,7 @@ public class humanvshumanControler {
 
     }
 
-    public void selectJoueur() {
+  /*  public void selectJoueur() {
         player1.setName(pseudo1.getText());
         player2.setName(pseudo2.getText());
 
@@ -74,12 +75,7 @@ public class humanvshumanControler {
 
         player1.setStart(true);
 
-
-
-
-
-
-    }
+    }*/
     // forcer les joueur à remplir leurs pseudo
   /* public void defaultvalue(){
         if(pseudo1.getText()=="") player1.setName("player1");

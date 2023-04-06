@@ -31,6 +31,8 @@ public class humanVsIaController {
     public static double lr;
     public  static MultiLayerPerceptron mlp;
 
+    String chemin = "C://Usersc//IdeaProjects//sifaoufatai//src//main//resources//com//example//morpion";
+
     @FXML
     public void lancerReglage(ActionEvent event) {
         Parent nouveauJeux;
@@ -124,7 +126,7 @@ public class humanVsIaController {
                 Parent nouveauJeux;
                 try {
                     System.out.println("jai un problemme ");
-                   // C:\Users\etudiant\Desktop\Morpion\resources\models
+
                      path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
                     mlp = MultiLayerPerceptron.load(path);
 

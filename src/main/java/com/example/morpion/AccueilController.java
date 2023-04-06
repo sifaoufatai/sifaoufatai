@@ -16,7 +16,7 @@ public class AccueilController {
 
 
     @FXML
-    public void OpenFenetre1(ActionEvent event) {
+    public void startGame(ActionEvent event) {
         Parent fenetre1;
         try {
             fenetre1 = FXMLLoader.load(getClass().getResource("FirstWindows.fxml"));
@@ -33,7 +33,7 @@ public class AccueilController {
     }
     //pour quitter le jeux
     @FXML
-    public void quitterJeux(ActionEvent event) {
+    public void quitGame(ActionEvent event) {
         JOptionPane jof;
         //Affiche la boite de dialogue pour quitter le jeux
         jof = new JOptionPane();
