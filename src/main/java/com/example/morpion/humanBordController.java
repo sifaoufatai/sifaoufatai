@@ -1,7 +1,9 @@
 package com.example.morpion;
 
+import javafx.animation.FillTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.StrokeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.paint.Color;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +44,7 @@ public class humanBordController   implements Initializable {
 
     Player j1 = humanvshumanControler.player1;
     Player j2 = humanvshumanControler.player2;
+    static Stage stage;
 
     @FXML //quitter la partie / revenir sur la page d'acceul
     public void quitterPartie(ActionEvent event) {
@@ -52,7 +57,7 @@ public class humanBordController   implements Initializable {
             try {
                 quitter = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
                 Scene configurationScene = new Scene(quitter);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(configurationScene);
                 stage.show();
             } catch (IOException e) {
@@ -209,7 +214,6 @@ public class humanBordController   implements Initializable {
     }
 
     @FXML
-
     public void reprendre(ActionEvent event) {
         labelWiner.setText("");
         fin= false ;
@@ -223,6 +227,4 @@ public class humanBordController   implements Initializable {
 
 
     }
-
-
 }

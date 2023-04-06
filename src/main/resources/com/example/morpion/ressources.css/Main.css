@@ -17,16 +17,16 @@
 
 #monHbox{
        -fx-background-color: #04CBF9;
-       -fx-font-size: 16px;
+       -fx-text-fill: white;
 } 
 
-#btnStart:hover{
+#btnStart:hover, #btnApply:hover{
 	-fx-background-color: #00ff00;
 	-fx-text-fill: white;
 	-fx-font-size: 22px;
 }
-#btnStart{
-    -fx-background-color: white;
+#btnStart, #btnApply{
+        -fx-background-color: white;
 	-fx-text-fill: black;
 	-fx-font-size: 22px;
 }
@@ -57,6 +57,13 @@
 #hboxNames{
 	-fx-background-color: #04CBF9;
 }
+
+#btnBack{
+        -fx-background-color: white;
+	-fx-text-fill: black;
+	-fx-font-size: 22px;
+}
+
 #tictactoe{
 	-fx-font-size: 60px;
 	-fx-text-fill: #ff0000;

@@ -43,8 +43,8 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="397.0" spacing="80.0">
                <children>
-                  <RadioButton fx:id="radioJoueur1" mnemonicParsing="false" onAction="#selectJoueur" text="Joueur1" />
-                  <RadioButton fx:id="radioJoueur2" mnemonicParsing="false" onAction="#selectJoueur" text="Joueur 2" />
+                  <RadioButton fx:id="radioJoueur1" mnemonicParsing="false"  text="Joueur1" />
+                  <RadioButton fx:id="radioJoueur2" mnemonicParsing="false"  text="Joueur 2" />
                </children>
                <VBox.margin>
                   <Insets />

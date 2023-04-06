@@ -1,5 +1,7 @@
 package com.example.morpion;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +26,7 @@ import java.util.ResourceBundle;
 public class ComputerBordConttroller implements Initializable {
     public Button bouton1,bouton2,bouton3,bouton4,bouton5,bouton6,bouton7, bouton8,bouton9;
     @FXML
-    private Label nom1, nom2, score1, score2, tourJoueur, pion1, pion2;
+    private Label nom1, nom2, score1, score2, tourJoueur, pion1, pion2, labelWiner;
     @FXML
     private Button btnQuitter;
     static String Pawn ="";
@@ -67,13 +70,13 @@ public class ComputerBordConttroller implements Initializable {
         boolean find= false ;
 
             if(human.isStart()){
-            tourJoueur.setText("its ur turn player"+ human.getName());
+            tourJoueur.setText("its your turn "+ human.getName());
 
             Pawn = ia.getPawn();
 
 
 
-            tourJoueur.setText("its ur turn player"+ ia.getName());
+            tourJoueur.setText("its your turn "+ ia.getName());
             // =ia.getPawn();
             //je recupere la case avec la probabilité plus grand
 
@@ -152,14 +155,26 @@ public class ComputerBordConttroller implements Initializable {
                 p.get(1).setText(ia.getScore() + "");
 
 
-                tourJoueur.setText("Le gagnant est " + ia.getName());
+                labelWiner.setText("You lost");
             } else if (human.getPawn() == val) {
                 human.setScore(score);
                 p.get(0).setText(human.getName());
                 p.get(1).setText(human.getScore() + "");
 
-                tourJoueur.setText("Le gagnant est " + human.getName());
+                labelWiner.setText("You Won " + human.getName());
             }
+            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 34px;");
+
+            RotateTransition rt = new RotateTransition(Duration.seconds(1), labelWiner);
+            rt.setByAngle(360);
+            rt.setAutoReverse(true);
+
+            ScaleTransition st = new ScaleTransition(Duration.seconds(1), labelWiner);
+            st.setToX(2);
+            st.setToY(2);
+
+            rt.play();
+            st.play();
         }
     }
     public void checkWin(){

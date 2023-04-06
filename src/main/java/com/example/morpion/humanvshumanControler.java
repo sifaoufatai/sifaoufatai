@@ -34,7 +34,10 @@ public class humanvshumanControler {
         System.out.println(player1.getName());
         Parent newgame;
         try {
+            if(!radioJoueur1.isSelected() && !radioJoueur2.isSelected()) radioJoueur1.setSelected(true);
+
             selectJoueur();
+
             newgame = FXMLLoader.load(getClass().getResource("humanvshumangameBord.fxml"));
             Scene configurationScene = new Scene(newgame);
             Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -45,8 +48,8 @@ public class humanvshumanControler {
         }
     }
 
-    @FXML
-    public void selectJoueur(ActionEvent actionEvent) {
+
+    public void selectJoueur() {
         player1.setName(pseudo1.getText());
         player2.setName(pseudo2.getText());
 
@@ -63,7 +66,7 @@ public class humanvshumanControler {
 
     }
 
-    public void selectJoueur() {
+  /*  public void selectJoueur() {
         player1.setName(pseudo1.getText());
         player2.setName(pseudo2.getText());
 
@@ -72,12 +75,7 @@ public class humanvshumanControler {
 
         player1.setStart(true);
 
-
-
-
-
-
-    }
+    }*/
     // forcer les joueur à remplir leurs pseudo
   /* public void defaultvalue(){
         if(pseudo1.getText()=="") player1.setName("player1");

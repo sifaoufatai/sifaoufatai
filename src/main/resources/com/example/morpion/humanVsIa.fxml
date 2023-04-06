@@ -9,71 +9,69 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morpion.humanVsIaController">
-   <center>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
-          <children>
-              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="482.0" spacing="20.0">
-                  <children>
-                      <Label text="Player">
-                          <font>
-                              <Font size="14.0" />
-                          </font>
-                      </Label>
-                      <TextField fx:id="nom" promptText="votre pseudo" />
-                  </children>
-                  <VBox.margin>
-                      <Insets top="30.0" />
-                  </VBox.margin>
-              </HBox>
-              <Separator prefHeight="0.0" prefWidth="482.0" />
-              <HBox alignment="CENTER" prefHeight="33.0" prefWidth="398.0" spacing="30.0">
-                  <children>
-                      <Label text="Level :  ">
-                          <font>
-                              <Font size="14.0" />
-                          </font>
-                      </Label>
-                      <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" text="Easy" />
-                      <RadioButton fx:id="difficile" mnemonicParsing="false" onAction="#selectNiveau" text="Hard" />
-                  </children>
-              </HBox>
-              <HBox alignment="CENTER" prefHeight="114.0" prefWidth="398.0">
-                  <padding>
-                      <Insets bottom="5.0" />
-                  </padding>
-              </HBox>
-          </children>
+<AnchorPane fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="930.0" stylesheets="@ressources.css/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morpion.humanVsIaController">
+   <children>
+      <VBox fx:id="monHbox" alignment="CENTER" layoutX="272.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="482.0" spacing="20.0">
+               <children>
+                  <Label text="Player">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nom" promptText="votre pseudo" />
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator prefHeight="0.0" prefWidth="482.0" />
+            <HBox alignment="CENTER" prefHeight="33.0" prefWidth="398.0" spacing="30.0">
+               <children>
+                  <Label text="Level :  ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" text="Easy" />
+                  <RadioButton fx:id="difficile" mnemonicParsing="false" onAction="#selectNiveau" text="Hard" />
+               </children>
+            </HBox>
+         </children>
       </VBox>
-   </center>
-   <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Setting">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#lancerReglage" onMenuValidation="#lancerReglage" text="setting" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Model">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#lancerModeles" onMenuValidation="#lancerModeles" text="Modèles appris" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#help" onMenuValidation="#help" text="help" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-   </top>
-   <bottom>
-          <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="START" BorderPane.alignment="CENTER" />
-   </bottom>
-</BorderPane>
+      <Separator layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="482.0" />
+      <MenuBar fx:id="menuBarreId" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="928.0" style="-fx-background-color: #07C8F3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="IA">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Setting" />
+                  <MenuItem mnemonicParsing="false" text="Models" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="About">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button fx:id="btnStart" layoutX="515.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
+      <Button fx:id="btnQuit" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
+   </children>
+</AnchorPane>
