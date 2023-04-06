@@ -1,27 +1,27 @@
 package com.example.morpion;
 
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+        import javafx.animation.RotateTransition;
+        import javafx.animation.ScaleTransition;
+        import javafx.event.ActionEvent;
+        import javafx.fxml.FXML;
+        import javafx.fxml.FXMLLoader;
+        import javafx.fxml.Initializable;
+        import javafx.scene.Node;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
+        import javafx.scene.control.Button;
+        import javafx.scene.control.Label;
+        import javafx.stage.Stage;
+        import javafx.util.Duration;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+        import javax.swing.*;
+        import java.awt.*;
+        import java.io.IOException;
+        import java.net.URL;
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.List;
+        import java.util.ResourceBundle;
 
 public class ComputerBordConttroller implements Initializable {
     public Button bouton1,bouton2,bouton3,bouton4,bouton5,bouton6,bouton7, bouton8,bouton9;
@@ -33,7 +33,8 @@ public class ComputerBordConttroller implements Initializable {
     public int cpt1 = 0, cpt2 = 0;
     Boolean fin = false ;
     static ia.MultiLayerPerceptron net ;
-    static double inputs[], outputs[];
+    public  static double[] inputs = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    public  static double outputs[];
 
     private List<Label> infojour1 = new ArrayList<>();
     private List<Label> infoIa = new ArrayList<>();
@@ -45,83 +46,96 @@ public class ComputerBordConttroller implements Initializable {
 
 
 
-        public void quitterPartie(ActionEvent event) {
-            JOptionPane jof;
-            jof = new JOptionPane();
-            Frame frame;
-            frame = new Frame("exit");
-            if (jof.showConfirmDialog(frame, "Voulez-vous quitter la partie?", "Information!", jof.YES_NO_OPTION) == jof.YES_NO_OPTION) {
-                Parent quitter;
-                try {
-                    quitter = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
-                    Scene configurationScene = new Scene(quitter);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(configurationScene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    public void quitterPartie(ActionEvent event) {
+        JOptionPane jof;
+        jof = new JOptionPane();
+        Frame frame;
+        frame = new Frame("exit");
+        if (jof.showConfirmDialog(frame, "Voulez-vous quitter la partie?", "Information!", jof.YES_NO_OPTION) == jof.YES_NO_OPTION) {
+            Parent quitter;
+            try {
+                quitter = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
+                Scene configurationScene = new Scene(quitter);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(configurationScene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+    }
 
 
-
+    // On essaie de faire jouer la machiene  simultanement avec  l'humain
     public void choisirJoueur() {
         boolean find= false ;
 
-            if(human.isStart()){
-            tourJoueur.setText("its your turn "+ human.getName());
 
-            Pawn = ia.getPawn();
+        if(human.isStart()) {
+            //
+            tourJoueur.setText("its ur turn player" + human.getName());
+
+            if (fin==false ) {
+                Pawn = ia.getPawn();
 
 
+                tourJoueur.setText("its ur turn player" + ia.getName());
+                // =ia.getPawn();
+                //je recupere la case avec la probabilité plus grand
 
-            tourJoueur.setText("its your turn "+ ia.getName());
-            // =ia.getPawn();
-            //je recupere la case avec la probabilité plus grand
+                //      inputs = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+                outputs = net.forwardPropagation(inputs);
+                System.out.println(Arrays.toString(outputs));
 
-            inputs=new double[]{0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-            outputs= net.forwardPropagation(inputs);
-            double tab[]=getOutputs(outputs);
-                    int i =0;
-                while(!find && i< tab.length ) {
+                double tab[] = getOutputs(outputs);
+                int i = 0;
+                while (!find && i < tab.length) {
                     if (tab[i] == 0 && bouton1.getText() == "") {
-                        bouton1.setText(Pawn); find = true;
+                        bouton1.setText(Pawn);
+                        inputs[0]=-1;
+                        find = true;
                     } else if (tab[i] == 1 && bouton2.getText() == "") {
                         bouton2.setText(Pawn);
+                        inputs[1]=-1;
                         find = true;
                     } else if (tab[i] == 2 && bouton3.getText() == "") {
                         bouton3.setText(Pawn);
                         find = true;
+                        inputs[2]=-1;
                     } else if (tab[i] == 3 && bouton4.getText() == "") {
                         bouton4.setText(Pawn);
+                        inputs[3]=-1;
                         find = true;
                     } else if (tab[i] == 4 && bouton5.getText() == "") {
                         bouton5.setText(Pawn);
+                        inputs[4]=-1;
                         find = true;
                     } else if (tab[i] == 5 && bouton6.getText() == "") {
                         bouton6.setText(Pawn);
+                        inputs[5]=-1;
                         find = true;
                     } else if (tab[i] == 6 && bouton7.getText() == "") {
                         bouton7.setText(Pawn);
+                        inputs[6]=-1;
                         find = true;
                     } else if (tab[i] == 7 && bouton8.getText() == "") {
                         bouton8.setText(Pawn);
+                        inputs[7]=-1;
                         find = true;
                     } else if (tab[i] == 8 && bouton9.getText() == "") {
                         bouton9.setText(Pawn);
+                        inputs[8]=-1;
                         find = true;
                     }
                     i++;
-                    System.out.println("cest  a été fait");
+                    //System.out.println("cest  a été fait");
+                    System.out.println(Arrays.toString(inputs));
 
-
-
-                    }
+                }
 
 
             }
-
+        }
 
 
 
@@ -139,27 +153,32 @@ public class ComputerBordConttroller implements Initializable {
             int score = 0;
             List<Label> p = new ArrayList<>();
 
-            if (val.equalsIgnoreCase("O")) {
+            if (val.equalsIgnoreCase("X")) {
                 cpt1++;
                 score = cpt1;
                 p = infojour1;
-            } else {
+            } else if(val.equalsIgnoreCase("O"))  {
                 cpt2++;
                 score = cpt2;
                 p = infoIa;
+
             }
 
             if (ia.getPawn() == val) {
                 ia.setScore(score);
                 p.get(0).setText(ia.getName());
-                p.get(1).setText(ia.getScore() + "");
+                p.get(1).setText(ia.getScore());
 
 
                 labelWiner.setText("You lost");
+
             } else if (human.getPawn() == val) {
                 human.setScore(score);
                 p.get(0).setText(human.getName());
-                p.get(1).setText(human.getScore() + "");
+                System.out.println(p.get(0)) ;System.out.println(p.get(1));
+
+                p.get(1).setText(human.getScore());
+
 
                 labelWiner.setText("You Won " + human.getName());
             }
@@ -178,38 +197,28 @@ public class ComputerBordConttroller implements Initializable {
         }
     }
     public void checkWin(){
-            gameScore(bouton1,bouton2,bouton3);
-            gameScore(bouton4,bouton5,bouton6);
-            gameScore(bouton7,bouton8,bouton9);
-            gameScore(bouton1,bouton4,bouton7);
-            gameScore(bouton2,bouton5,bouton8);
-            gameScore(bouton3,bouton6,bouton9);
-            gameScore(bouton1,bouton5,bouton9);
-            gameScore(bouton3,bouton5,bouton7);
+        gameScore(bouton1,bouton2,bouton3);
+        gameScore(bouton4,bouton5,bouton6);
+        gameScore(bouton7,bouton8,bouton9);
+        gameScore(bouton1,bouton4,bouton7);
+        gameScore(bouton2,bouton5,bouton8);
+        gameScore(bouton3,bouton6,bouton9);
+        gameScore(bouton1,bouton5,bouton9);
+        gameScore(bouton3,bouton5,bouton7);
 
 
-        }
-
-
-
-
-
-
-
-
-
-
+    }
     @FXML
 
-        public void reprendre(ActionEvent event) {
-            fin= false ;
-            for(Button b :listButtons) {b.setText("");b.setStyle("");}
-            if(human.start){
+    public void reprendre(ActionEvent event) {
+        fin= false ;
+        for(Button b :listButtons) {b.setText("");b.setStyle("");}
+        if(human.start){
 
-                tourJoueur.setText(human.getName().concat("cest à vous de jouer "));
-            }
-            else {
-                tourJoueur.setText(ia.getName().concat("cest à vous de jouer "));}
+            tourJoueur.setText(human.getName().concat("its ur turn "));
+        }
+        else {
+            tourJoueur.setText(ia.getName().concat("its ur turn  "));}
 
 
 
@@ -222,9 +231,15 @@ public class ComputerBordConttroller implements Initializable {
         btn = (Button) event.getSource();
 
         if(btn.getText() != "O" && btn.getText() != "X" && !fin) {
+            int i=-1 ;
+            ///checkWin();
             btn.setText(human.getPawn());
+            for(Button B : listButtons){if (B.equals(btn) ) i =listButtons.indexOf(B); }
+            checkWin();
+            inputs[i]=1;
             choisirJoueur();
             checkWin();
+            System.out.println(fin);
 
             if(btn.getText() == "O") {
                 btn.setStyle("-fx-text-fill: green;-fx-font-size: 30px;");
@@ -238,10 +253,11 @@ public class ComputerBordConttroller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         infojour1.add(nom1);
-        infojour1.add(pion1);
         infojour1.add(score1);
 
-       // les labels de l'ia
+        infojour1.add(pion1);
+
+        // les labels de l'ia
         infoIa.add(nom2);
         infoIa.add(score2);
         infoIa.add(pion2);
@@ -249,10 +265,11 @@ public class ComputerBordConttroller implements Initializable {
         if(human.isStart()) {tourJoueur.setText(human.getName().concat("its your turn"));}
         else if (ia.isStart()){
             tourJoueur.setText(ia.getName().concat("its your turn"));}
-
+        if(human.getName().isEmpty()) human.setName("PLAYER");
         nom1.setText(human.getName());
-        score1.setText(String.valueOf(human.getScore()));
-       nom2.setText(String.valueOf(ia.getScore()));
+
+        score1.setText(human.getScore());
+        nom2.setText(ia.getName());
 
         score2.setText(String.valueOf(ia.getScore()));
         listButtons.add(bouton1);
@@ -275,25 +292,25 @@ public class ComputerBordConttroller implements Initializable {
 
 
     }
-     void getMaxindice(){
+    void getMaxindice(){
 
 
     }
 
     //je recupere lindice du plus grand nombre de mon tableau
-     int getindiceMaxvalueofBord(double[]outputs){
+    int getindiceMaxvalueofBord(double[]outputs){
         double max= outputs[0];
         int indice=0;
         for(int i = 0; i< outputs.length; i++){
             if( max< outputs[i]){
                 max =outputs[i];
-                    indice =i;
-               ;
+                indice =i;
+                ;
 
             }
 
         }
-         return indice ;
+        return indice ;
     }
     //ici je recupere un tableau trie par odre croissant des intice de outpout;
     public double [] getOutputs(double [] outputs){
@@ -301,11 +318,19 @@ public class ComputerBordConttroller implements Initializable {
 
         for(int i =0; i<outputs.length;i++ ){
             int j = getindiceMaxvalueofBord(outputs);
-                Tab[i]=j;
-                outputs[j]=0;
+            Tab[i]=j;
+            outputs[j]=0;
         }
         return Tab;
 
+    }
+    boolean checkend(){
+
+        for ( Button b :listButtons){
+            if (b.getText() !="") return false ;
+        }
+
+        return true;
     }
 
 

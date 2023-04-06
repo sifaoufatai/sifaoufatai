@@ -10,11 +10,13 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
@@ -28,21 +30,20 @@ public class ProgessBarContoller implements Initializable {
 
     public static MultiLayerPerceptron net;
     private static int currentEpoch;
-    public Task<MultiLayerPerceptron> task;
-    public Label labelTest;
-    public ProgressBar pb;
+    public  Task<MultiLayerPerceptron> task;
+    public  Label labelTest;
+    public  ProgressBar pb;
     Test test1;
+     @FXML
+     private Button btnLearn;
 
     public String s;
     public int h;
     public double lr;
     public int lh;
-    public String path;
+    public  String path;
 
-    public void pressStartButton(ActionEvent event) {
-
-
-
+    public  void pressStartButton(ActionEvent actionEvent) {
         try {
 
             int size = 9;
@@ -56,9 +57,9 @@ public class ProgessBarContoller implements Initializable {
 
             System.out.println("---");
 
-            if (this.net == null) {
-                this.net = new MultiLayerPerceptron(layers, 0.1, new SigmoidalTransferFunction());
-                this.currentEpoch = 0;
+            if (net == null) {
+                net = new MultiLayerPerceptron(layers, 0.1, new SigmoidalTransferFunction());
+                currentEpoch = 0;
             }
             net.save(path);
 
@@ -76,13 +77,8 @@ public class ProgessBarContoller implements Initializable {
                     labelTest.setText(newValue);
                 }
             });
-
-
-
-
-
             //
-            Thread thread = new Thread(this.task);
+            Thread thread = new Thread(task);
             thread.start();
             task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                 @Override
@@ -94,6 +90,11 @@ public class ProgessBarContoller implements Initializable {
                     Parent fenetre1;
                     try {
                         fenetre1 = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
+                        Scene scene1 = new Scene(fenetre1);
+                        Stage stage1 = (Stage)((Node) btnLearn).getScene().getWindow();
+                        stage1.setTitle("Tic-Tac-Toe");
+                        stage1.setScene(scene1);
+                        stage1.show();
                     } catch (IOException e) {
                         e.printStackTrace();
                         return;
@@ -109,7 +110,6 @@ public class ProgessBarContoller implements Initializable {
 
 
 
-
         } catch (Exception ex) {
             System.out.println("Test.test()");
             ex.printStackTrace();
@@ -122,7 +122,7 @@ public class ProgessBarContoller implements Initializable {
 
             @Override
             protected MultiLayerPerceptron call() throws Exception {
-                double epochs =1000; //1000000000 ;
+                double epochs =10000000; //1000000000 ;
                 double error = 0.0 ;
                 int onePercent = (int)(epochs/100);
 
@@ -206,6 +206,8 @@ public class ProgessBarContoller implements Initializable {
             ex.printStackTrace();
             System.exit(-1);
         }
+        Stage stage = (Stage) btnLearn.getScene().getWindow();
+        stage.close();
         return aux;
     }
 
@@ -215,7 +217,7 @@ public class ProgessBarContoller implements Initializable {
         h  = humanVsIaController.h;
         lr = humanVsIaController.lr;
         lh = humanVsIaController.lh;
-        path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
+        path = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models//mlp_"+h+"_"+lr+"_"+lh+".srl";
     }
 
     }

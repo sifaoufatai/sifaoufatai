@@ -1,9 +1,6 @@
 package com.example.morpion;
 
-import javafx.animation.FillTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.StrokeTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,9 +75,9 @@ public class humanBordController   implements Initializable {
         infosJoueur2.add(pion2);
 
         if (j1.isStart() == true) {
-            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer !"));
+            tourJoueur.setText(j1.getName().concat(" it's your turn"));
         } else if (j2.isStart() == true) {
-            tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer !"));
+            tourJoueur.setText(j2.getName().concat(" it's your turn"));
         }
 
 
@@ -104,12 +101,12 @@ public class humanBordController   implements Initializable {
     //cette fonction permet de choisir le tour du joueur qui doit jouer
     public void choisirJoueur() {
         if (j1.isStart()) {
-            tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer !"));
+            tourJoueur.setText(j2.getName().concat(" it's your turn"));
             commencer = j1.getPawn();
         }
 
         if (j2.isStart()) {
-            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer !"));
+            tourJoueur.setText(j1.getName().concat(" it's your turn"));
             commencer = j2.getPawn();
         }
     }
@@ -119,7 +116,7 @@ public class humanBordController   implements Initializable {
         if (b1.getText() == b2.getText() && b2.getText() == b3.getText() && !b3.getText().isEmpty()) {
 
             fin = true;
-            tourJoueur.setText("Fin de Partie !!!");
+            tourJoueur.setText("Game Over");
 
             String val = b1.getText();
             int score = 0;
@@ -140,17 +137,17 @@ public class humanBordController   implements Initializable {
                 p.get(0).setText(j1.getName());
                 p.get(1).setText(j1.getScore() + "");
 
-                labelWiner.setText("Le gagnant est " + j1.getName());
+                labelWiner.setText("The winner is " + j1.getName());
 
             } else if (j2.getPawn() == val) {
                 j2.setScore(score);
                 p.get(0).setText(j2.getName());
                 p.get(1).setText(j2.getScore() + "");
 
-                labelWiner.setText("Le gagnant est " + j2.getName());
+                labelWiner.setText("The winner is " + j2.getName());
             }
 
-            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 34px;");
+            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 29px;");
 
             RotateTransition rt = new RotateTransition(Duration.seconds(1), labelWiner);
             rt.setByAngle(360);
@@ -163,13 +160,11 @@ public class humanBordController   implements Initializable {
             rt.play();
             st.play();
 
-         /*   //application des transitions
             rotationTransition(b1);
             rotationTransition(b2);
             rotationTransition(b3);
-            deplacementTransition(tourJoueur);
-            zoomTransition(tourJoueur);*/
 
+            fendu(b1); fendu(b3); fendu(b3);
         }
 
 
@@ -220,11 +215,62 @@ public class humanBordController   implements Initializable {
         for(Button b :listButtons) {b.setText("");b.setStyle("");}
         if(j1.start){
 
-            tourJoueur.setText(j1.getName().concat(" c'est à vous de jouer "));
+            tourJoueur.setText(j1.getName().concat(" it's your turn "));
         }
         else {
-        tourJoueur.setText(j2.getName().concat(" c'est à vous de jouer "));}
-
+        tourJoueur.setText(j2.getName().concat(" it's your turn "));}
 
     }
+
+    @FXML
+    public void back(ActionEvent actionEvent){
+        try {
+            Parent home = FXMLLoader.load(getClass().getResource("humanvshuman.fxml"));
+            Scene scene1 = new Scene(home);
+            Stage stage1 = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage1.setTitle("Tic-Tac-Toe");
+
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    //transition des rotations
+    public void rotationTransition(Button btn) {
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(1000),btn);
+        rotateTransition.setByAngle(180f);
+        rotateTransition.setCycleCount(4);
+        rotateTransition.setAutoReverse(true);
+        rotateTransition.play();
+      //  btn.setStyle("-fx-background-color:mediumturquoise; -fx-text-fill: black;-fx-font-size: 34px;");
+    }
+    public void fendu(Button btn){
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), btn);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(2);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
+     //   btn.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-size: 24px;");
+    }
+
+    @FXML
+    public void about(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        jOption.showMessageDialog(null,"Tic-tac-toe, also called Morpion (by analogy with the game of Morpion)\n and oxo in Belgium, is a game of reflection practiced by two players,\n turn by turn, the aim of which is to create the first alignment.", "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @FXML
+    public void help(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
 }

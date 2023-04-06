@@ -25,7 +25,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nom" promptText="votre pseudo" />
+                  <TextField fx:id="nom" promptText="your pseudo" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -39,7 +39,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" text="Easy" />
+                  <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" prefHeight="18.0" prefWidth="51.0" text="Easy" />
+                  <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#selectNiveau" text="Medium" />
                   <RadioButton fx:id="difficile" mnemonicParsing="false" onAction="#selectNiveau" text="Hard" />
                </children>
             </HBox>
@@ -50,28 +51,29 @@
          <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Home" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="IA">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Setting" />
-                  <MenuItem mnemonicParsing="false" text="Models" />
+                  <MenuItem mnemonicParsing="false" onAction="#setting" text="Setting" />
+                  <MenuItem mnemonicParsing="false" onAction="#model" text="Models" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#help" text="Help" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="About">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
       <Button fx:id="btnStart" layoutX="515.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
-      <Button fx:id="btnQuit" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
+      <Button fx:id="btnCancel" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
+      <Button fx:id="btnQuit" layoutX="36.0" layoutY="609.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="128.0" text="Quit" />
    </children>
 </AnchorPane>

@@ -25,18 +25,18 @@
 	-fx-text-fill: white;
 	-fx-font-size: 22px;
 }
-#btnStart, #btnApply{
+#btnStart, #btnApply, #btnDelete{
         -fx-background-color: white;
 	-fx-text-fill: black;
 	-fx-font-size: 22px;
 }
 
-#btnQuit:hover{
+#btnQuit:hover, #btnCancel:hover{
 	-fx-background-color: #ff0000;
 	-fx-text-fill: white;
 	-fx-font-size: 22px;
 }
-#btnQuit{
+#btnQuit, #btnCancel{
     -fx-background-color: white;
 	-fx-text-fill: black;
 	-fx-font-size: 22px;

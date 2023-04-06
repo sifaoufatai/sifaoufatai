@@ -45,4 +45,18 @@ public class AccueilController {
         }
     }
 
+    @FXML
+    public void about(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        jOption.showMessageDialog(null,"Tic-tac-toe, also called Morpion (by analogy with the game of Morpion)\n and oxo in Belgium, is a game of reflection practiced by two players,\n turn by turn, the aim of which is to create the first alignment.", "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @FXML
+    public void help(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.morpion;
 
+import  com.example.morpion.ProgessBarContoller;
 import ia.Config;
 import ia.ConfigFileLoader;
 import ia.MultiLayerPerceptron;
@@ -18,11 +19,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+
 public class humanVsIaController {
     @FXML
     public TextField nom;
     public RadioButton difficile;
-    public RadioButton facile;
+    public RadioButton facile, medium;
     static Player human = new Player();
     static Player computer = new Player();
     public static String level;
@@ -31,16 +33,16 @@ public class humanVsIaController {
     public static double lr;
     public  static MultiLayerPerceptron mlp;
 
-    String chemin = "C://Usersc//IdeaProjects//sifaoufatai//src//main//resources//com//example//morpion";
+    String chemin = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models";
 
     @FXML
-    public void lancerReglage(ActionEvent event) {
+    public void setting(ActionEvent event) {
         Parent nouveauJeux;
         try {
             nouveauJeux = FXMLLoader.load(getClass().getResource("setting.fxml"));
             Scene configurationScene = new Scene(nouveauJeux);
             Stage stage = new Stage();
-            stage.setTitle("Tic-Tac-Toe");
+            stage.setTitle("Setting");
             stage.setScene(configurationScene);
             stage.show();
         } catch (IOException e) {
@@ -50,13 +52,13 @@ public class humanVsIaController {
 
 
     @FXML
-    public void lancerModeles(ActionEvent event) {
+    public void model(ActionEvent event) {
         Parent nouveauJeux;
         try {
             nouveauJeux = FXMLLoader.load(getClass().getResource("model-view.fxml"));
             Scene configurationScene = new Scene(nouveauJeux);
             Stage stage = new Stage();
-            stage.setTitle("Tic-Tac-Toe");
+            stage.setTitle("Models");
             stage.setScene(configurationScene);
             stage.show();
         } catch (IOException e) {
@@ -71,16 +73,21 @@ public class humanVsIaController {
         jOption = new JOptionPane();
         jOption.showMessageDialog(null, "Pour jouer, vous devriez cliquer sur le menu Réglage pour regler le niveau de l'IA.\n donner le nom du joueur .\n vous devriez choisir le niveau Facile ou Difficile à jouer.\n Cliquer sur le bouton Commencer pour commencer\n ", "Aide", JOptionPane.INFORMATION_MESSAGE);
     }
-
+    @FXML
+    public void about(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        jOption.showMessageDialog(null,"Tic-tac-toe, also called Morpion (by analogy with the game of Morpion)\n and oxo in Belgium, is a game of reflection practiced by two players,\n turn by turn, the aim of which is to create the first alignment.", "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     @FXML
 
     public void selectNiveau(ActionEvent event) {
         computer.setName("Computer ");
-        if (nom.getText() == "") human.setName("Human");
+        if (nom.getText() == "") human.setName("Player");
         else human.setName(nom.getText());
         computer.setPawn("O");
-        human.setPawn("x");
+        human.setPawn("X");
         human.setStart(true);
         computer.setStart(false);
 
@@ -109,25 +116,30 @@ public class humanVsIaController {
             lr = config.learningRate;
             lh = config.numberOfhiddenLayers;
 
-
+        }else if (medium.isSelected()) {
+            level = "M";
+            medium.setSelected(false);
+            ConfigFileLoader configFileLoader = new ConfigFileLoader();
+            configFileLoader.loadConfigFile("resources/config.txt");
+            Config config;
+            config = configFileLoader.get("M");
+            h = config.hiddenLayerSize;
+            lr = config.learningRate;
+            lh = config.numberOfhiddenLayers;
         }
     }
 
     @FXML
     public void commencerJeux(ActionEvent event) {
-
-
-
             //verification dans le fichier config.txt
           Boolean r = checkModel(h , lr, lh );
 
             if(r) {	//le fichier existe il nous load le chemin du fichier et ouvre la fenetre Joueur vs IA
                 Parent nouveauJeux;
                 try {
-                    System.out.println("jai un problemme ");
 
-                     path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
-                    mlp = MultiLayerPerceptron.load(path);
+                     path = chemin+"//mlp_"+h+"_"+lr+"_"+lh+".srl";
+                     mlp = MultiLayerPerceptron.load(path);
 
                     nouveauJeux = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
                     Scene configurationScene = new Scene(nouveauJeux);
@@ -141,16 +153,15 @@ public class humanVsIaController {
                 }
 
             }else if(!r ) {	//le fichier n'existe pas il recupere le chemin et lance la fenetre d'apprentissage
-                path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
+                path = chemin+"//mlp_"+h+"_"+lr+ "_" +lh+".srl";
                 Parent apprentissage;
                 try {
-                    apprentissage = FXMLLoader.load(getClass().getResource("Progessbar.fxml"));
-                    Scene apprentissageScene = new Scene(apprentissage);
-                    System.out.println(lr + human.toString());
-                    //cette ligne permet de recuperer les infos
-                    Stage stage1 = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    stage1.setScene(apprentissageScene);
-                    stage1.show();
+                    Parent root = FXMLLoader.load(getClass().getResource("Progessbar.fxml"));
+                    Stage stage=new Stage();
+                    stage.setTitle("learn");
+                    stage.setScene(new Scene(root));
+                    stage.setResizable(false);
+                    stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -159,8 +170,9 @@ public class humanVsIaController {
 
 
     public Boolean checkModel(int h, double lr, int lh) {
-        String path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
+        String path = chemin+"//mlp_"+h+"_"+lr+ "_" +lh+".srl";
         File file = new File(path);
+
         if (file.exists()) {
             return true;
         } else return false;
@@ -169,8 +181,7 @@ public class humanVsIaController {
     public void createFile(int h, double lr, int lh) throws IOException {
 
         try {
-            path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+ "_" +lh+".srl";
-           // String path = "C:\Users\etudiant\Desktop\Morpion\resources\models\mlp_" + h + "_" + lr + "_" + lh + ".srl";
+            path = chemin+"//mlp_"+h+"_"+lr+ "_" +lh+".srl";
             File file = new File(path);
 
             Boolean b;

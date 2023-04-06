@@ -10,6 +10,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -27,14 +28,11 @@ public class ModelController implements Initializable{
     @FXML
     private TextField mod;
 
-
-
+    @FXML
+    private Button btnQuit;
 
     public ModelController() {
     }
-
-
-
 
 
     @Override
@@ -42,7 +40,7 @@ public class ModelController implements Initializable{
         // TODO Auto-generated method stub
 
         //pour les modeles deja appris dans la ListeView
-        File repertoire = new File("resources/models");
+        File repertoire = new File("C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models");
         String liste[] = repertoire.list();
         if (liste != null) {
             for (int i = 0; i < liste.length; i++) {
@@ -53,12 +51,18 @@ public class ModelController implements Initializable{
     //lorsque l'on clique sur le bouton supprimer il nous supprime un modele
     @FXML
     public void delete(ActionEvent event) {
-       // list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        String path = "C:\\Users\\etudiant\\Desktop\\Morpion\\resources\\models"+list.getSelectionModel().getSelectedItem().toString();
+        String chemin = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models\\";
+        String path = chemin+list.getSelectionModel().getSelectedItem().toString();
         File file = new File(path);
         file.delete();
         list.getItems().remove(list.getSelectionModel().getSelectedItem());
     }
-        }
+
+    @FXML
+    public void exit(ActionEvent event){
+           Stage stage = (Stage) btnQuit.getScene().getWindow();
+           stage.close();
+    }
+}
 
 
