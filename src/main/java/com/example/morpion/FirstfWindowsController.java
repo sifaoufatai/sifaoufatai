@@ -1,5 +1,7 @@
 package com.example.morpion;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -114,5 +117,26 @@ public class FirstfWindowsController{
         stage.setResizable(false);
         stage.show();
     }
+
+
+    //transition des rotations
+    public static void rotationTransition(Button btn) {
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(1000),btn);
+        rotateTransition.setByAngle(180f);
+        rotateTransition.setCycleCount(4);
+        rotateTransition.setAutoReverse(true);
+        rotateTransition.play();
+        //  btn.setStyle("-fx-background-color:mediumturquoise; -fx-text-fill: black;-fx-font-size: 34px;");
+    }
+    public static void fendu(Button btn){
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), btn);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(2);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
+        //   btn.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-size: 24px;");
+    }
+
 
 }

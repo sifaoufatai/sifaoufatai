@@ -52,7 +52,7 @@ public class humanBordController   implements Initializable {
         if (jof.showConfirmDialog(frame, "Voulez-vous quitter la partie?", "Information!", jof.YES_NO_OPTION) == jof.YES_NO_OPTION) {
             Parent quitter;
             try {
-                quitter = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
+                quitter = FXMLLoader.load(getClass().getResource("FirstWindows.fxml"));
                 Scene configurationScene = new Scene(quitter);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(configurationScene);
@@ -146,6 +146,9 @@ public class humanBordController   implements Initializable {
 
                 labelWiner.setText("The winner is " + j2.getName());
             }
+            else{
+                labelWiner.setText("Draw");
+            }
 
             labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 29px;");
 
@@ -160,11 +163,13 @@ public class humanBordController   implements Initializable {
             rt.play();
             st.play();
 
-            rotationTransition(b1);
-            rotationTransition(b2);
-            rotationTransition(b3);
+            FirstfWindowsController.rotationTransition(b1);
+            FirstfWindowsController.rotationTransition(b2);
+            FirstfWindowsController.rotationTransition(b3);
 
-            fendu(b1); fendu(b3); fendu(b3);
+            FirstfWindowsController.fendu(b1);
+            FirstfWindowsController.fendu(b2);
+            FirstfWindowsController.fendu(b3);
         }
 
 
@@ -220,42 +225,6 @@ public class humanBordController   implements Initializable {
         else {
         tourJoueur.setText(j2.getName().concat(" it's your turn "));}
 
-    }
-
-    @FXML
-    public void back(ActionEvent actionEvent){
-        try {
-            Parent home = FXMLLoader.load(getClass().getResource("humanvshuman.fxml"));
-            Scene scene1 = new Scene(home);
-            Stage stage1 = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            stage1.setTitle("Tic-Tac-Toe");
-
-            stage1.setScene(scene1);
-            stage1.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    //transition des rotations
-    public void rotationTransition(Button btn) {
-        RotateTransition rotateTransition = new RotateTransition(Duration.millis(1000),btn);
-        rotateTransition.setByAngle(180f);
-        rotateTransition.setCycleCount(4);
-        rotateTransition.setAutoReverse(true);
-        rotateTransition.play();
-      //  btn.setStyle("-fx-background-color:mediumturquoise; -fx-text-fill: black;-fx-font-size: 34px;");
-    }
-    public void fendu(Button btn){
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), btn);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-        fadeTransition.setCycleCount(2);
-        fadeTransition.setAutoReverse(true);
-        fadeTransition.play();
-     //   btn.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-size: 24px;");
     }
 
     @FXML

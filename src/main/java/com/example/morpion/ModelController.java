@@ -1,5 +1,6 @@
 package com.example.morpion;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,13 +17,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static java.nio.file.Files.delete;
 
 
 public class ModelController implements Initializable{
-
-
     @FXML
-
     public ListView list;
 
     @FXML
@@ -34,11 +33,11 @@ public class ModelController implements Initializable{
     public ModelController() {
     }
 
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-
+        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        // list.getSelectionModel().selectedItemProperty().addListener(this::changed);
         //pour les modeles deja appris dans la ListeView
         File repertoire = new File("C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models");
         String liste[] = repertoire.list();
@@ -48,21 +47,56 @@ public class ModelController implements Initializable{
             }
         }
     }
-    //lorsque l'on clique sur le bouton supprimer il nous supprime un modele
+
+    private void suprression(ObservableList<String> listefilename) {
+
+        String directoryPath = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models";
+
+        File directory = new File(directoryPath);
+
+        // VÃ©rifier si le rÃ©pertoire existe
+        if (!directory.exists() || !directory.isDirectory()) {
+            System.out.println("Le rÃ©pertoire spÃ©cifiÃ© n'existe pas.");
+        }
+
+        // Supprimer les fichiers
+        for (String fileName : listefilename) {
+            File file = new File(directory, fileName);
+            if (file.exists() && file.isFile()) {
+                if (file.delete()) {
+                    System.out.println("Le fichier " + fileName + " a Ã©tÃ© supprimÃ©.");
+                } else {
+                    System.out.println("Impossible de supprimer le fichier " + fileName);
+                }
+            } else {
+                System.out.println("Le fichier " + fileName + " n'existe pas dans le rÃ©pertoire spÃ©cifiÃ©.");
+            }
+        }
+    }
+    public void changed(ObservableValue<? extends String> Observable , String oldVal, String newVal){
+        ObservableList<String> itemsToRemove = list.getSelectionModel().getSelectedItems();
+
+
+    }
     @FXML
     public void delete(ActionEvent event) {
-        String chemin = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models\\";
-        String path = chemin+list.getSelectionModel().getSelectedItem().toString();
-        File file = new File(path);
-        file.delete();
-        list.getItems().remove(list.getSelectionModel().getSelectedItem());
+        String mod ="";
+        ObservableList<String> lISTED;
+        lISTED=list.getSelectionModel().getSelectedItems();
+        suprression(lISTED);
+
+        list.getItems().removeAll(lISTED);
+
+
+        for(String s:lISTED) System.out.println(s);
     }
 
     @FXML
-    public void exit(ActionEvent event){
-           Stage stage = (Stage) btnQuit.getScene().getWindow();
-           stage.close();
+    public void exit(ActionEvent actionEvent){
+         Stage stage = (Stage) btnQuit.getScene().getWindow();
+         stage.close();
     }
+
+
+
 }
-
-

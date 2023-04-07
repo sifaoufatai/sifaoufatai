@@ -10,11 +10,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -68,7 +72,6 @@ public class humanVsIaController {
 
     @FXML
     public void help(ActionEvent actionEvent) {
-
         JOptionPane jOption;
         jOption = new JOptionPane();
         jOption.showMessageDialog(null, "Pour jouer, vous devriez cliquer sur le menu Réglage pour regler le niveau de l'IA.\n donner le nom du joueur .\n vous devriez choisir le niveau Facile ou Difficile à jouer.\n Cliquer sur le bouton Commencer pour commencer\n ", "Aide", JOptionPane.INFORMATION_MESSAGE);
@@ -84,7 +87,7 @@ public class humanVsIaController {
 
     public void selectNiveau(ActionEvent event) {
         computer.setName("Computer ");
-        if (nom.getText() == "") human.setName("Player");
+        if (nom.getText().isEmpty()) human.setName("Player ");
         else human.setName(nom.getText());
         computer.setPawn("O");
         human.setPawn("X");
@@ -94,6 +97,7 @@ public class humanVsIaController {
 
         if (difficile.isSelected()) {
             facile.setSelected(false);
+            medium.setSelected(false);
             level = "D";
             ConfigFileLoader configFileLoader = new ConfigFileLoader();
             configFileLoader.loadConfigFile("resources/config.txt");
@@ -106,8 +110,9 @@ public class humanVsIaController {
 
 
         } else if (facile.isSelected()) {
-            level = "F";
             difficile.setSelected(false);
+            medium.setSelected(false);
+            level = "F";
             ConfigFileLoader configFileLoader = new ConfigFileLoader();
             configFileLoader.loadConfigFile("resources/config.txt");
             Config config;
@@ -116,9 +121,10 @@ public class humanVsIaController {
             lr = config.learningRate;
             lh = config.numberOfhiddenLayers;
 
-        }else if (medium.isSelected()) {
+        }else{
+            facile.setSelected(false);
+            difficile.setSelected(false);
             level = "M";
-            medium.setSelected(false);
             ConfigFileLoader configFileLoader = new ConfigFileLoader();
             configFileLoader.loadConfigFile("resources/config.txt");
             Config config;
@@ -137,7 +143,6 @@ public class humanVsIaController {
             if(r) {	//le fichier existe il nous load le chemin du fichier et ouvre la fenetre Joueur vs IA
                 Parent nouveauJeux;
                 try {
-
                      path = chemin+"//mlp_"+h+"_"+lr+"_"+lh+".srl";
                      mlp = MultiLayerPerceptron.load(path);
 
@@ -158,6 +163,7 @@ public class humanVsIaController {
                 try {
                     Parent root = FXMLLoader.load(getClass().getResource("Progessbar.fxml"));
                     Stage stage=new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
                     stage.setTitle("learn");
                     stage.setScene(new Scene(root));
                     stage.setResizable(false);
@@ -178,7 +184,36 @@ public class humanVsIaController {
         } else return false;
     }
 
-    public void createFile(int h, double lr, int lh) throws IOException {
+
+    @FXML
+    public void cancel(ActionEvent actionEvent){
+        try {
+            Parent home = FXMLLoader.load(getClass().getResource("FirstWindows.fxml"));
+            Scene scene1 = new Scene(home);
+            Stage stage1 = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage1.setTitle("You want to play against : ");
+
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void quit(ActionEvent event) {
+        JOptionPane jof;
+        //Affiche la boite de dialogue pour quitter le jeux
+        jof = new JOptionPane();
+        Frame frame;
+        frame = new Frame("exit");
+        // Si on choisit oui  alors on quitte le jeu, sinon on reste dans le jeu
+        if(jof.showConfirmDialog(frame, "Voulez-vous quitter le jeux?","Information!",jof.YES_NO_OPTION) == jof.YES_NO_OPTION) {
+            System.exit(0);
+        }
+    }
+
+  /*  public void createFile(int h, double lr, int lh) throws IOException {
 
         try {
             path = chemin+"//mlp_"+h+"_"+lr+ "_" +lh+".srl";
@@ -193,6 +228,6 @@ public class humanVsIaController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 }

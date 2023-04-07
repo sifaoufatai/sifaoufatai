@@ -16,7 +16,11 @@
 
 <AnchorPane fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="930.0" stylesheets="@ressources.css/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morpion.humanVsIaController">
    <children>
-      <VBox fx:id="monHbox" alignment="CENTER" layoutX="272.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
+      <Button fx:id="btnCancel" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
+      <Button fx:id="btnQuit" layoutX="36.0" layoutY="609.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quit" prefHeight="43.0" prefWidth="128.0" text="Quit" />
+      <Button fx:id="btnStart" layoutX="508.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
+
+      <VBox fx:id="monHbox" alignment="CENTER" layoutX="265.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
          <children>
             <HBox alignment="CENTER" prefHeight="48.0" prefWidth="482.0" spacing="20.0">
                <children>
@@ -25,7 +29,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nom" promptText="your pseudo" />
+                  <TextField fx:id="nom" promptText="your pseudo" styleClass="textNom" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -72,8 +76,5 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Button fx:id="btnStart" layoutX="515.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
-      <Button fx:id="btnCancel" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
-      <Button fx:id="btnQuit" layoutX="36.0" layoutY="609.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="128.0" text="Quit" />
-   </children>
+      </children>
 </AnchorPane>

@@ -54,7 +54,7 @@ public class ComputerBordConttroller implements Initializable {
         if (jof.showConfirmDialog(frame, "Voulez-vous quitter la partie?", "Information!", jof.YES_NO_OPTION) == jof.YES_NO_OPTION) {
             Parent quitter;
             try {
-                quitter = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
+                quitter = FXMLLoader.load(getClass().getResource("FirstWindows.fxml"));
                 Scene configurationScene = new Scene(quitter);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(configurationScene);
@@ -70,20 +70,13 @@ public class ComputerBordConttroller implements Initializable {
     public void choisirJoueur() {
         boolean find= false ;
 
-
         if(human.isStart()) {
-            //
-            tourJoueur.setText("its ur turn player" + human.getName());
+
+            tourJoueur.setText(human.getName().concat(" it's your turn "));
 
             if (fin==false ) {
                 Pawn = ia.getPawn();
 
-
-                tourJoueur.setText("its ur turn player" + ia.getName());
-                // =ia.getPawn();
-                //je recupere la case avec la probabilité plus grand
-
-                //      inputs = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
                 outputs = net.forwardPropagation(inputs);
                 System.out.println(Arrays.toString(outputs));
 
@@ -128,27 +121,19 @@ public class ComputerBordConttroller implements Initializable {
                         find = true;
                     }
                     i++;
-                    //System.out.println("cest  a été fait");
-                    System.out.println(Arrays.toString(inputs));
 
                 }
-
+                checkWin();
 
             }
         }
-
-
-
-
-
-
 
     }
     public void gameScore(Button b1, Button b2, Button b3) {
         if (b1.getText() == b2.getText() && b2.getText() == b3.getText() && !b3.getText().isEmpty()) {
 
             fin = true;
-            tourJoueur.setText("Fin de Partie !!!");
+            tourJoueur.setText("Game Over");
             String val = b1.getText();
             int score = 0;
             List<Label> p = new ArrayList<>();
@@ -180,9 +165,12 @@ public class ComputerBordConttroller implements Initializable {
                 p.get(1).setText(human.getScore());
 
 
-                labelWiner.setText("You Won " + human.getName());
+                labelWiner.setText("You Won");
             }
-            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 34px;");
+            else{
+                labelWiner.setText("Draw");
+            }
+            labelWiner.setStyle("-fx-text-fill: blue;-fx-font-size: 29px;");
 
             RotateTransition rt = new RotateTransition(Duration.seconds(1), labelWiner);
             rt.setByAngle(360);
@@ -194,6 +182,14 @@ public class ComputerBordConttroller implements Initializable {
 
             rt.play();
             st.play();
+
+            FirstfWindowsController.rotationTransition(b1);
+            FirstfWindowsController.rotationTransition(b2);
+            FirstfWindowsController.rotationTransition(b3);
+
+            FirstfWindowsController.fendu(b1);
+            FirstfWindowsController.fendu(b2);
+            FirstfWindowsController.fendu(b3);
         }
     }
     public void checkWin(){
@@ -212,17 +208,13 @@ public class ComputerBordConttroller implements Initializable {
 
     public void reprendre(ActionEvent event) {
         fin= false ;
+        labelWiner.setText("");
         for(Button b :listButtons) {b.setText("");b.setStyle("");}
         if(human.start){
-
-            tourJoueur.setText(human.getName().concat("its ur turn "));
+            tourJoueur.setText(human.getName().concat(" it's your turn "));
         }
         else {
-            tourJoueur.setText(ia.getName().concat("its ur turn  "));}
-
-
-
-
+            tourJoueur.setText(" IA's turn ");}
     }
     @FXML
     public void jouer(ActionEvent event){
@@ -232,21 +224,17 @@ public class ComputerBordConttroller implements Initializable {
 
         if(btn.getText() != "O" && btn.getText() != "X" && !fin) {
             int i=-1 ;
-            ///checkWin();
+
             btn.setText(human.getPawn());
             for(Button B : listButtons){if (B.equals(btn) ) i =listButtons.indexOf(B); }
             checkWin();
             inputs[i]=1;
             choisirJoueur();
-            checkWin();
-            System.out.println(fin);
 
             if(btn.getText() == "O") {
-                btn.setStyle("-fx-text-fill: green;-fx-font-size: 30px;");
+                btn.setStyle("-fx-text-fill: green;-fx-font-size: 34px;");
             }else if(btn.getText() == "X") {
                 btn.setStyle("-fx-text-fill: red;-fx-font-size: 34px;");
-
-
             }
         }}
 
@@ -262,10 +250,10 @@ public class ComputerBordConttroller implements Initializable {
         infoIa.add(score2);
         infoIa.add(pion2);
 
-        if(human.isStart()) {tourJoueur.setText(human.getName().concat("its your turn"));}
-        else if (ia.isStart()){
-            tourJoueur.setText(ia.getName().concat("its your turn"));}
-        if(human.getName().isEmpty()) human.setName("PLAYER");
+        if(human.isStart()) {tourJoueur.setText(human.getName().concat(" it's your turn"));}
+        //else if (ia.isStart()){
+        //    tourJoueur.setText(ia.getName().concat("its your turn"));}
+        if(human.getName().isEmpty()) human.setName("Player");
         nom1.setText(human.getName());
 
         score1.setText(human.getScore());
@@ -282,17 +270,12 @@ public class ComputerBordConttroller implements Initializable {
         listButtons.add(bouton8);
         listButtons.add(bouton9);
 
-//
         path=humanVsIaController.path;
         net =humanVsIaController.mlp;
         inputs=new double[]{0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
         outputs=net.forwardPropagation(inputs);
         System.out.println(path);   System.out.println(Arrays.toString(outputs));
 
-
-
-    }
-    void getMaxindice(){
 
 
     }
@@ -305,8 +288,6 @@ public class ComputerBordConttroller implements Initializable {
             if( max< outputs[i]){
                 max =outputs[i];
                 indice =i;
-                ;
-
             }
 
         }
@@ -324,13 +305,19 @@ public class ComputerBordConttroller implements Initializable {
         return Tab;
 
     }
-    boolean checkend(){
 
-        for ( Button b :listButtons){
-            if (b.getText() !="") return false ;
-        }
+    @FXML
+    public void about(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        jOption.showMessageDialog(null,"Tic-tac-toe, also called Morpion (by analogy with the game of Morpion)\n and oxo in Belgium, is a game of reflection practiced by two players,\n turn by turn, the aim of which is to create the first alignment.", "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
 
-        return true;
+    @FXML
+    public void help(ActionEvent event) {
+        JOptionPane jOption;
+        jOption = new JOptionPane();
+        String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
     }
 
 

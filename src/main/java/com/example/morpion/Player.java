@@ -2,7 +2,6 @@ package com.example.morpion;
 
 public class Player {
     public  String name ;
-    public  String username ;
     public int score ;
     public String pawn ;
     public boolean start = false ;
@@ -51,11 +50,4 @@ public class Player {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

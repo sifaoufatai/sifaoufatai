@@ -19,7 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +44,8 @@ public class ProgessBarContoller implements Initializable {
     public double lr;
     public int lh;
     public  String path;
+
+
 
     public  void pressStartButton(ActionEvent actionEvent) {
         try {
@@ -81,30 +85,33 @@ public class ProgessBarContoller implements Initializable {
             Thread thread = new Thread(task);
             thread.start();
             task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
                 @Override
                 public void handle(WorkerStateEvent event) {
-                    // Get the window of the progress bar
-                    Stage stage = (Stage) pb.getScene().getWindow();
 
-                    // Load the new scene
                     Parent fenetre1;
+
                     try {
+                        // fermer la fenetre de progressBar
+                        Stage stage = (Stage) btnLearn.getScene().getWindow();
+                        stage.close();
+                      /*  for (Window window : Window.getWindows()) {
+                            if (window instanceof Stage) {
+                                ((Stage) window).close();
+                            }
+                        }*/
+                        // charger la fenetre de jeu contre la machine
                         fenetre1 = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
                         Scene scene1 = new Scene(fenetre1);
-                        Stage stage1 = (Stage)((Node) btnLearn).getScene().getWindow();
+                        //Stage stage1 = (Stage) pb.getScene().getWindow();
+                        Stage stage1 = new Stage();
                         stage1.setTitle("Tic-Tac-Toe");
                         stage1.setScene(scene1);
                         stage1.show();
                     } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
+                        throw new RuntimeException(e);
                     }
 
-                    // Replace the current scene with the new one
-                    Scene scene1 = new Scene(fenetre1);
-                    stage.setTitle("Tic-Tac-Toe");
-                    stage.setScene(scene1);
-                    stage.show();
                 }
             });
 
@@ -206,8 +213,8 @@ public class ProgessBarContoller implements Initializable {
             ex.printStackTrace();
             System.exit(-1);
         }
-        Stage stage = (Stage) btnLearn.getScene().getWindow();
-        stage.close();
+
+
         return aux;
     }
 

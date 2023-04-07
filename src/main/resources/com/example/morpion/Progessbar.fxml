@@ -18,14 +18,14 @@
             </opaqueInsets>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-            <children>
-                <Button fx:id="btnLearn" mnemonicParsing="false" onAction="#pressStartButton" text="Start" />
-            </children>
+         <children>
+                <ProgressBar fx:id="pb" prefWidth="200.0" progress="0.0" />
+         </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <children>
-                <ProgressBar fx:id="pb" prefWidth="200.0" progress="0.0" />
-            </children>
+         <children>
+                <Button fx:id="btnLearn" mnemonicParsing="false" onAction="#pressStartButton" text="Start" />
+         </children>
         </HBox>
     </children>
 </VBox>
