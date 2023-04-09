@@ -37,7 +37,6 @@ public class ModelController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        // list.getSelectionModel().selectedItemProperty().addListener(this::changed);
         //pour les modeles deja appris dans la ListeView
         File repertoire = new File("C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models");
         String liste[] = repertoire.list();
@@ -47,7 +46,7 @@ public class ModelController implements Initializable{
             }
         }
     }
-
+    //supprimer une liste des fichiers sélectionné
     private void suprression(ObservableList<String> listefilename) {
 
         String directoryPath = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models";
@@ -78,6 +77,9 @@ public class ModelController implements Initializable{
 
 
     }
+    /*Action pour supprimer les models
+     il fait appelle a la fonction suppression qui supprime des liste de fichiers
+    */
     @FXML
     public void delete(ActionEvent event) {
         String mod ="";

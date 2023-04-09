@@ -71,17 +71,20 @@ public class ComputerBordConttroller implements Initializable {
         boolean find= false ;
 
         if(human.isStart()) {
-
+            //remplissage du label qui montre le jouer courant
             tourJoueur.setText(human.getName().concat(" it's your turn "));
 
             if (fin==false ) {
                 Pawn = ia.getPawn();
-
-                outputs = net.forwardPropagation(inputs);
+                //je recupere la case avec la probabilité plus grand    outputs = net.forwardPropagation(inputs);
                 System.out.println(Arrays.toString(outputs));
-
+                //recupreation du tableau des probaabilité trié en ordre decroissant
                 double tab[] = getOutputs(outputs);
                 int i = 0;
+                /*
+                  ici la machine joue suite au jeu de lhumain
+                 je verifie si le 1er case de mon tableau est vide dans ce cas je voue si non jexploire les autres case de mon tableau et ainsi de suite
+                 */
                 while (!find && i < tab.length) {
                     if (tab[i] == 0 && bouton1.getText() == "") {
                         bouton1.setText(Pawn);
@@ -123,12 +126,14 @@ public class ComputerBordConttroller implements Initializable {
                     i++;
 
                 }
+                //apres le jeu de la machine on verifie sil ya un gagnat ou pas
                 checkWin();
 
             }
         }
 
     }
+    // la description des scenario gagnant avec les bouton gagant
     public void gameScore(Button b1, Button b2, Button b3) {
         if (b1.getText() == b2.getText() && b2.getText() == b3.getText() && !b3.getText().isEmpty()) {
 
@@ -192,6 +197,7 @@ public class ComputerBordConttroller implements Initializable {
             FirstfWindowsController.fendu(b3);
         }
     }
+    // on verifie tout les possiblité de gain possible avec les 8 possibilité
     public void checkWin(){
         gameScore(bouton1,bouton2,bouton3);
         gameScore(bouton4,bouton5,bouton6);
@@ -216,18 +222,20 @@ public class ComputerBordConttroller implements Initializable {
         else {
             tourJoueur.setText(" IA's turn ");}
     }
+    // ici je joue effectivement avec l'humain
     @FXML
     public void jouer(ActionEvent event){
-
+        //recuper des info du bouton cliqué
         Button btn;
         btn = (Button) event.getSource();
 
         if(btn.getText() != "O" && btn.getText() != "X" && !fin) {
             int i=-1 ;
-
+            // si le bouton est libre je pose mon pion là
             btn.setText(human.getPawn());
             for(Button B : listButtons){if (B.equals(btn) ) i =listButtons.indexOf(B); }
             checkWin();
+            //mise a jour des case de mon tableau de bord du jeu le 1 signifie que kla ces est pris par lhumain
             inputs[i]=1;
             choisirJoueur();
 

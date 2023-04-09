@@ -45,7 +45,7 @@ public class humanBordController   implements Initializable {
     static Stage stage;
     public static Player winner ;
 
-    @FXML //quitter la partie / revenir sur la page d'acceul
+    @FXML //quitter la partie / revenir sur la page ou il y a le choix de mode de jeux
     public void quitterPartie(ActionEvent event) {
         JOptionPane jof;
         jof = new JOptionPane();
@@ -149,8 +149,6 @@ public class humanBordController   implements Initializable {
 
                 winner = j1;
                 winner.setDate(LocalDate.now());
-             //   winner.setDate(LocalDate.now());
-                //mise à jour de la liste
                 myplayer =winner.redahistorique(winner);
 
                 winner.addliste(myplayer.getListehistorique());
@@ -165,8 +163,6 @@ public class humanBordController   implements Initializable {
 
                 winner = j2;
                 winner.setDate(LocalDate.now());
-                //winner.setDate(LocalDate.now());
-                //mise à jour de la liste
                 myplayer =winner.redahistorique(winner);
 
                 winner.addliste(myplayer.getListehistorique());
@@ -240,7 +236,7 @@ public class humanBordController   implements Initializable {
         }
 
     }
-
+    // Action pour rejouer
     @FXML
     public void reprendre(ActionEvent event) {
         labelWiner.setText("");
@@ -268,7 +264,7 @@ public class humanBordController   implements Initializable {
         jOption = new JOptionPane();
         String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
     }
-
+  // regarder l'historique de jeu
     @FXML
     public void historique(ActionEvent actionEvent) {
 

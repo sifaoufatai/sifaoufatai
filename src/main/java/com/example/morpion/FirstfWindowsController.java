@@ -22,6 +22,8 @@ public class FirstfWindowsController{
 
     @FXML
     private Button btnCancel;
+
+    //Action pour jouer avec la machine
     @FXML
     public void playWhithMachine(ActionEvent actionEvent) {
 
@@ -39,6 +41,7 @@ public class FirstfWindowsController{
         }
     }
 
+    // Action pour jouer humain contre humain
     @FXML
     public void playWhithHuman(ActionEvent actionEvent) {
         Parent optionIA;
@@ -70,6 +73,7 @@ public class FirstfWindowsController{
         String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // fermer l'application
     @FXML
     public void quit(ActionEvent event) {
         JOptionPane jof;
@@ -82,7 +86,7 @@ public class FirstfWindowsController{
             System.exit(0);
         }
     }
-
+   // revenire à la page precédente
     @FXML
     public void cancel(ActionEvent actionEvent){
         try {
@@ -97,7 +101,7 @@ public class FirstfWindowsController{
             e.printStackTrace();
         }
     }
-
+     // pour aller à la page de réglage
     @FXML
     public void setting(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("setting.fxml"));
@@ -107,7 +111,7 @@ public class FirstfWindowsController{
         stage.setResizable(false);
         stage.show();
     }
-
+     //pour aller à la page de gestion des models
     @FXML
     public void model(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("model-view.fxml"));
@@ -118,6 +122,7 @@ public class FirstfWindowsController{
         stage.show();
     }
 
+    //**************** deux fonction pour les annimation
 
     //transition des rotations
     public static void rotationTransition(Button btn) {
@@ -126,8 +131,7 @@ public class FirstfWindowsController{
         rotateTransition.setCycleCount(4);
         rotateTransition.setAutoReverse(true);
         rotateTransition.play();
-        //  btn.setStyle("-fx-background-color:mediumturquoise; -fx-text-fill: black;-fx-font-size: 34px;");
-    }
+         }
     public static void fendu(Button btn){
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), btn);
         fadeTransition.setFromValue(1.0);
@@ -135,8 +139,7 @@ public class FirstfWindowsController{
         fadeTransition.setCycleCount(2);
         fadeTransition.setAutoReverse(true);
         fadeTransition.play();
-        //   btn.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-size: 24px;");
-    }
+         }
 
 
 }

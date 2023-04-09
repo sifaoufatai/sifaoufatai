@@ -46,7 +46,7 @@ public class humanvshumanControler {
         }
     }
 
-
+   // selectionner le joueur qui commence
     public void selectJoueur() {
         player1.setName(pseudo1.getText());
         player2.setName(pseudo2.getText());
@@ -63,7 +63,7 @@ public class humanvshumanControler {
         }
 
     }
-
+     // revenir à la page précedente
     public void cancel(ActionEvent actionEvent) throws IOException {
         try {
             Parent home = FXMLLoader.load(getClass().getResource("FirstWindows.fxml"));
@@ -98,6 +98,7 @@ public class humanvshumanControler {
         stage.show();
     }
 
+    // quiter l'application
     @FXML
     public void exit(ActionEvent event) {
         JOptionPane jof;

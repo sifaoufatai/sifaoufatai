@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
         this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Acueil.fxml"));
         Parent root = fxmlLoader.load();
-        fxmlLoader.setRoot(root); // Définit la racine de votre fichie
+        fxmlLoader.setRoot(root);
 
         scene = new Scene(root, 930, 690);
 

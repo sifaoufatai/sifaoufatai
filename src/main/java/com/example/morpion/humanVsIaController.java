@@ -84,6 +84,9 @@ public class humanVsIaController {
     }
 
     @FXML
+     /* on essyae de remplir les champs des objet Player avec les action de l'utilisateurs
+      on choisi en meme temps le model correspondant
+      */
 
     public void selectNiveau(ActionEvent event) {
         computer.setName("Computer ");
@@ -135,6 +138,7 @@ public class humanVsIaController {
         }
     }
 
+    // lorsque l'utisateur lance le jeux
     @FXML
     public void commencerJeux(ActionEvent event) {
             //verification dans le fichier config.txt
@@ -174,7 +178,7 @@ public class humanVsIaController {
             }
         }
 
-
+    // verification si le model existe ou pas
     public Boolean checkModel(int h, double lr, int lh) {
         String path = chemin+"//mlp_"+h+"_"+lr+ "_" +lh+".srl";
         File file = new File(path);
