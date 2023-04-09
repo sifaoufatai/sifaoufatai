@@ -10,18 +10,14 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,22 +28,21 @@ public class ProgessBarContoller implements Initializable {
 
     public static MultiLayerPerceptron net;
     private static int currentEpoch;
-    public  Task<MultiLayerPerceptron> task;
-    public  Label labelTest;
-    public  ProgressBar pb;
+    public Task<MultiLayerPerceptron> task;
+    public Label labelTest;
+    public ProgressBar pb;
     Test test1;
-     @FXML
-     private Button btnLearn;
 
     public String s;
     public int h;
     public double lr;
     public int lh;
-    public  String path;
+    public String path;
+
+    public void pressStartButton(ActionEvent event) {
 
 
 
-    public  void pressStartButton(ActionEvent actionEvent) {
         try {
 
             int size = 9;
@@ -61,9 +56,9 @@ public class ProgessBarContoller implements Initializable {
 
             System.out.println("---");
 
-            if (net == null) {
-                net = new MultiLayerPerceptron(layers, 0.1, new SigmoidalTransferFunction());
-                currentEpoch = 0;
+            if (this.net == null) {
+                this.net = new MultiLayerPerceptron(layers, 0.1, new SigmoidalTransferFunction());
+                this.currentEpoch = 0;
             }
             net.save(path);
 
@@ -77,43 +72,41 @@ public class ProgessBarContoller implements Initializable {
             task.messageProperty().addListener(new ChangeListener<String>() {
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     System.out.println(newValue);
-                    // tf.setText("bonjour");
+
                     labelTest.setText(newValue);
                 }
             });
+
+
+
+
+
             //
-            Thread thread = new Thread(task);
+            Thread thread = new Thread(this.task);
             thread.start();
             task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-
                 @Override
                 public void handle(WorkerStateEvent event) {
+                    // Get the window of the progress bar
+                    Stage stage = (Stage) pb.getScene().getWindow();
 
+                    // Load the new scene
                     Parent fenetre1;
-
                     try {
-                        // fermer la fenetre de progressBar
-                        Stage stage = (Stage) btnLearn.getScene().getWindow();
-                        stage.close();
-                      /*  for (Window window : Window.getWindows()) {
-                            if (window instanceof Stage) {
-                                ((Stage) window).close();
-                            }
-                        }*/
-                        // charger la fenetre de jeu contre la machine
                         fenetre1 = FXMLLoader.load(getClass().getResource("humanVsComputerBoard.fxml"));
-                        Scene scene1 = new Scene(fenetre1);
-                        //Stage stage1 = (Stage) pb.getScene().getWindow();
-                        Stage stage1 = new Stage();
-                        stage1.setTitle("Tic-Tac-Toe");
-                        stage1.setScene(scene1);
-                        stage1.show();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
+                        return;
                     }
 
+                    // Replace the current scene with the new one
+                    Scene scene1 = new Scene(fenetre1);
+                    stage.setTitle("Tic-Tac-Toe");
+                    stage.setScene(scene1);
+                    stage.show();
                 }
             });
+
 
 
 
@@ -129,7 +122,8 @@ public class ProgessBarContoller implements Initializable {
 
             @Override
             protected MultiLayerPerceptron call() throws Exception {
-                double epochs =10000000; //1000000000 ;
+               double epochs =1000; //1000000000 ;
+               // double epochs =1000000000;
                 double error = 0.0 ;
                 int onePercent = (int)(epochs/100);
 
@@ -160,7 +154,7 @@ public class ProgessBarContoller implements Initializable {
                 }
                 error /= epochs ;
                 if ( epochs > 0 ) {
-                    //updateMessage("final error is " + df_error.format(error));
+
                     updateMessage("final error is " + error);
                 }
                 net.save(chemin);
@@ -213,8 +207,6 @@ public class ProgessBarContoller implements Initializable {
             ex.printStackTrace();
             System.exit(-1);
         }
-
-
         return aux;
     }
 
@@ -224,7 +216,7 @@ public class ProgessBarContoller implements Initializable {
         h  = humanVsIaController.h;
         lr = humanVsIaController.lr;
         lh = humanVsIaController.lh;
-        path = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models//mlp_"+h+"_"+lr+"_"+lh+".srl";
+        path = "C://Users//etudiant//Desktop//Morpion//resources//models//mlp_"+h+"_"+lr+"_"+lh+".srl";
     }
 
     }

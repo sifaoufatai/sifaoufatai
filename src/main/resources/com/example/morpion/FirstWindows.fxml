@@ -13,23 +13,23 @@
     <menus>
         <Menu mnemonicParsing="false" text="Home">
             <items>
-                <MenuItem mnemonicParsing="false" text="Home" />
+                <MenuItem mnemonicParsing="false" text="Action 1" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="IA">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#setting" text="Setting" />
-                <MenuItem mnemonicParsing="false" onAction="#model" text="Models" />
+                <MenuItem mnemonicParsing="false" text="Setting" />
+                <MenuItem mnemonicParsing="false" text="Models" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#help" text="Help" />
+                <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="About">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                <MenuItem mnemonicParsing="false" text="About" />
             </items>
         </Menu>
     </menus>
@@ -37,7 +37,6 @@
 <Button fx:id="btnHumain" layoutX="320.0" layoutY="195.0" mnemonicParsing="false" onAction="#playWhithHuman" prefHeight="74.0" prefWidth="289.0" text="Human" />
 <VBox fx:id="vboxOrdi" layoutX="338.0" layoutY="206.0" />
 <Button fx:id="btnOrdinateur" layoutX="319.0" layoutY="308.0" mnemonicParsing="false" onAction="#playWhithMachine" prefHeight="74.0" prefWidth="290.0" text="Computer" />
-<Button fx:id="btnCancel" layoutX="384.0" layoutY="480.0" mnemonicParsing="false" onAction="#cancel" prefHeight="47.0" prefWidth="162.0" stylesheets="@ressources.css/Main.css" text="Cancel" />
-      <Button fx:id="btnQuit" layoutX="384.0" layoutY="566.0" mnemonicParsing="false" onAction="#quit" prefHeight="47.0" prefWidth="162.0" stylesheets="@ressources.css/Main.css" text="Quit" />
+<Button fx:id="btnQuit" layoutX="384.0" layoutY="480.0" mnemonicParsing="false" onAction="#cancel" prefHeight="47.0" prefWidth="162.0" stylesheets="@ressources.css/Main.css" text="Cancel" />
 </children>
         </AnchorPane>

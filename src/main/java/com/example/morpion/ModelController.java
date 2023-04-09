@@ -11,7 +11,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -21,25 +20,32 @@ import static java.nio.file.Files.delete;
 
 
 public class ModelController implements Initializable{
+
+
     @FXML
+
     public ListView list;
 
     @FXML
     private TextField mod;
 
-    @FXML
-    private Button btnQuit;
+
+
 
     public ModelController() {
     }
 
+
+
+
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        // list.getSelectionModel().selectedItemProperty().addListener(this::changed);
+            list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+           // list.getSelectionModel().selectedItemProperty().addListener(this::changed);
         //pour les modeles deja appris dans la ListeView
-        File repertoire = new File("C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models");
+        File repertoire = new File("resources/models");
         String liste[] = repertoire.list();
         if (liste != null) {
             for (int i = 0; i < liste.length; i++) {
@@ -48,15 +54,25 @@ public class ModelController implements Initializable{
         }
     }
 
+
+
+
+
+
+
+
+
     private void suprression(ObservableList<String> listefilename) {
 
-        String directoryPath = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models";
+
+        String directoryPath = "resources/models";
 
         File directory = new File(directoryPath);
 
         // VÃ©rifier si le rÃ©pertoire existe
         if (!directory.exists() || !directory.isDirectory()) {
             System.out.println("Le rÃ©pertoire spÃ©cifiÃ© n'existe pas.");
+
         }
 
         // Supprimer les fichiers
@@ -77,9 +93,9 @@ public class ModelController implements Initializable{
         ObservableList<String> itemsToRemove = list.getSelectionModel().getSelectedItems();
 
 
-    }
-    @FXML
-    public void delete(ActionEvent event) {
+        }
+        @FXML
+     public void delete(ActionEvent event) {
         String mod ="";
         ObservableList<String> lISTED;
         lISTED=list.getSelectionModel().getSelectedItems();
@@ -91,12 +107,9 @@ public class ModelController implements Initializable{
         for(String s:lISTED) System.out.println(s);
     }
 
-    @FXML
-    public void exit(ActionEvent actionEvent){
-         Stage stage = (Stage) btnQuit.getScene().getWindow();
-         stage.close();
+
+
     }
 
 
 
-}

@@ -43,8 +43,8 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="397.0" spacing="80.0">
                <children>
-                  <RadioButton fx:id="radioJoueur1" mnemonicParsing="false" text="Joueur1" />
-                  <RadioButton fx:id="radioJoueur2" mnemonicParsing="false" text="Joueur 2" />
+                  <RadioButton fx:id="radioJoueur1" mnemonicParsing="false"  text="Joueur1" />
+                  <RadioButton fx:id="radioJoueur2" mnemonicParsing="false"  text="Joueur 2" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -57,29 +57,28 @@
          <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Home" />
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="IA">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#setting" text="Setting" />
-                  <MenuItem mnemonicParsing="false" onAction="#model" text="Models" />
+                  <MenuItem mnemonicParsing="false" text="Setting" />
+                  <MenuItem mnemonicParsing="false" text="Models" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#help" text="Help" />
+                  <MenuItem mnemonicParsing="false" text="Delete" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="About">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                  <MenuItem mnemonicParsing="false" text="About" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
-      <Button fx:id="btnStart" layoutX="541.0" layoutY="438.0" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="46.0" prefWidth="106.0" text="Start" />
-      <Button fx:id="btnCancel" layoutX="245.0" layoutY="438.0" mnemonicParsing="false" onAction="#cancel" prefHeight="46.0" prefWidth="106.0" text="Cancel" />
-      <Button fx:id="btnQuit" layoutX="39.0" layoutY="599.0" mnemonicParsing="false" onAction="#exit" prefHeight="46.0" prefWidth="106.0" text="Quit" />
+      <Button fx:id="btnStart" layoutX="584.0" layoutY="438.0" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="46.0" prefWidth="106.0" text="Start" />
+      <Button fx:id="btnQuit" layoutX="245.0" layoutY="438.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>

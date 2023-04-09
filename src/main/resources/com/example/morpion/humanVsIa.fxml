@@ -16,11 +16,7 @@
 
 <AnchorPane fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="930.0" stylesheets="@ressources.css/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morpion.humanVsIaController">
    <children>
-      <Button fx:id="btnCancel" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
-      <Button fx:id="btnQuit" layoutX="36.0" layoutY="609.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quit" prefHeight="43.0" prefWidth="128.0" text="Quit" />
-      <Button fx:id="btnStart" layoutX="508.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
-
-      <VBox fx:id="monHbox" alignment="CENTER" layoutX="265.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
+      <VBox fx:id="monHbox" alignment="CENTER" layoutX="272.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="398.0" spacing="10.0" stylesheets="@ressources.css/Main.css">
          <children>
             <HBox alignment="CENTER" prefHeight="48.0" prefWidth="482.0" spacing="20.0">
                <children>
@@ -29,7 +25,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nom" promptText="your pseudo" styleClass="textNom" />
+                  <TextField fx:id="nom" promptText="votre pseudo" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -43,8 +39,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" prefHeight="18.0" prefWidth="51.0" text="Easy" />
-                  <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#selectNiveau" text="Medium" />
+                  <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" text="Easy" />
                   <RadioButton fx:id="difficile" mnemonicParsing="false" onAction="#selectNiveau" text="Hard" />
                </children>
             </HBox>
@@ -55,26 +50,28 @@
          <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Home" />
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="IA">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#setting" text="Setting" />
-                  <MenuItem mnemonicParsing="false" onAction="#model" text="Models" />
+                  <MenuItem mnemonicParsing="false" text="Setting" />
+                  <MenuItem mnemonicParsing="false" text="Models" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#help" text="Help" />
+                  <MenuItem mnemonicParsing="false" text="Delete" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="About">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                  <MenuItem mnemonicParsing="false" text="About" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
-      </children>
+      <Button fx:id="btnStart" layoutX="515.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Start" />
+      <Button fx:id="btnQuit" layoutX="272.0" layoutY="441.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commencerJeux" prefHeight="43.0" prefWidth="154.0" text="Cancel" />
+   </children>
 </AnchorPane>
