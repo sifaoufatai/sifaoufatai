@@ -251,8 +251,6 @@ public class ComputerBordConttroller implements Initializable {
         infoIa.add(pion2);
 
         if(human.isStart()) {tourJoueur.setText(human.getName().concat(" it's your turn"));}
-        //else if (ia.isStart()){
-        //    tourJoueur.setText(ia.getName().concat("its your turn"));}
         if(human.getName().isEmpty()) human.setName("Player");
         nom1.setText(human.getName());
 
@@ -317,7 +315,7 @@ public class ComputerBordConttroller implements Initializable {
     public void help(ActionEvent event) {
         JOptionPane jOption;
         jOption = new JOptionPane();
-        String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
+        String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "Help", JOptionPane.INFORMATION_MESSAGE);
     }
 
 

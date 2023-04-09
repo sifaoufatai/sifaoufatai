@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,6 +43,7 @@ public class humanBordController   implements Initializable {
     Player j1 = humanvshumanControler.player1;
     Player j2 = humanvshumanControler.player2;
     static Stage stage;
+    public static Player winner ;
 
     @FXML //quitter la partie / revenir sur la page d'acceul
     public void quitterPartie(ActionEvent event) {
@@ -67,6 +69,11 @@ public class humanBordController   implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+        j1.Creathistorique();
+        j1.writehistorique(j1);
+        j2.Creathistorique();
+        j2.writehistorique(j2);
+
         infosJoueur1.add(nom1);
         infosJoueur1.add(score1);
         infosJoueur1.add(pion1);
@@ -115,6 +122,9 @@ public class humanBordController   implements Initializable {
     public void gameScore(Button b1, Button b2, Button b3) {
         if (b1.getText() == b2.getText() && b2.getText() == b3.getText() && !b3.getText().isEmpty()) {
 
+            ArrayList<Player> listeh = new ArrayList<>();
+            Player myplayer= new Player();
+
             fin = true;
             tourJoueur.setText("Game Over");
 
@@ -137,12 +147,30 @@ public class humanBordController   implements Initializable {
                 p.get(0).setText(j1.getName());
                 p.get(1).setText(j1.getScore() + "");
 
+                winner = j1;
+                winner.setDate(LocalDate.now());
+             //   winner.setDate(LocalDate.now());
+                //mise à jour de la liste
+                myplayer =winner.redahistorique(winner);
+
+                winner.addliste(myplayer.getListehistorique());
+                winner.writehistorique(winner);
+
                 labelWiner.setText("The winner is " + j1.getName());
 
             } else if (j2.getPawn() == val) {
                 j2.setScore(score);
                 p.get(0).setText(j2.getName());
                 p.get(1).setText(j2.getScore() + "");
+
+                winner = j2;
+                winner.setDate(LocalDate.now());
+                //winner.setDate(LocalDate.now());
+                //mise à jour de la liste
+                myplayer =winner.redahistorique(winner);
+
+                winner.addliste(myplayer.getListehistorique());
+                winner.writehistorique(winner);
 
                 labelWiner.setText("The winner is " + j2.getName());
             }
@@ -239,6 +267,23 @@ public class humanBordController   implements Initializable {
         JOptionPane jOption;
         jOption = new JOptionPane();
         String message = "Two players compete. They must each in turn fill a box of the grid with the \n symbol assigned to them: O or X. The winner is the one who manages to align \n three identical symbols, horizontally, vertically or diagonally.\n ";    jOption.showMessageDialog(null,message, "About the game", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @FXML
+    public void historique(ActionEvent actionEvent) {
+
+        Parent option;
+        try {
+            option = FXMLLoader.load(getClass().getResource("historique.fxml"));
+            Scene scene1 = new Scene(option);
+            Stage stage1 = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage1.setTitle("Historic");
+
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

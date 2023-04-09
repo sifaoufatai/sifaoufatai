@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 
         scene = new Scene(root, 930, 690);
 
-        stage.setTitle("Hello welecom to tictac to application !");
+        stage.setTitle("Hello welecom to Morpion application !");
         stage.setScene(scene);
         stage.show();
     }

@@ -36,8 +36,6 @@ public class ProgessBarContoller implements Initializable {
     public  Label labelTest;
     public  ProgressBar pb;
     Test test1;
-     @FXML
-     private Button btnLearn;
 
     public String s;
     public int h;
@@ -47,7 +45,7 @@ public class ProgessBarContoller implements Initializable {
 
 
 
-    public  void pressStartButton(ActionEvent actionEvent) {
+    public  void pressStartButton() {
         try {
 
             int size = 9;
@@ -93,7 +91,7 @@ public class ProgessBarContoller implements Initializable {
 
                     try {
                         // fermer la fenetre de progressBar
-                        Stage stage = (Stage) btnLearn.getScene().getWindow();
+                        Stage stage = (Stage) pb.getScene().getWindow();
                         stage.close();
                       /*  for (Window window : Window.getWindows()) {
                             if (window instanceof Stage) {
@@ -225,6 +223,7 @@ public class ProgessBarContoller implements Initializable {
         lr = humanVsIaController.lr;
         lh = humanVsIaController.lh;
         path = "C:\\Users\\pc\\IdeaProjects\\sifaoufatai\\src\\main\\resources\\com\\example\\morpion\\models//mlp_"+h+"_"+lr+"_"+lh+".srl";
+        pressStartButton();
     }
 
     }

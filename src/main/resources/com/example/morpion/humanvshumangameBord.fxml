@@ -162,5 +162,6 @@
             </Menu>
          </menus>
       </MenuBar>
+      <Button fx:id="btnHistoric" layoutX="786.0" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#historique" prefHeight="48.0" prefWidth="129.0" text="Historic" />
    </children>
 </AnchorPane>

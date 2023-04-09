@@ -29,7 +29,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nom" promptText="your pseudo" styleClass="textNom" />
+                  <TextField fx:id="nom" promptText="your pseudo" styleClass="textNom" text="player" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -44,7 +44,7 @@
                      </font>
                   </Label>
                   <RadioButton fx:id="facile" mnemonicParsing="false" onAction="#selectNiveau" prefHeight="18.0" prefWidth="51.0" text="Easy" />
-                  <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#selectNiveau" text="Medium" />
+                  <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#selectNiveau" selected="true" text="Medium" />
                   <RadioButton fx:id="difficile" mnemonicParsing="false" onAction="#selectNiveau" text="Hard" />
                </children>
             </HBox>
